@@ -1,3 +1,3 @@
-# android-template
+# compose-lab
 
-A "modern" template for Android projects using Kotlin DSL build files & Jetpack Compose.
+A Jetpack Compose playground.
