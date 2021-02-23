@@ -1,3 +1,4 @@
-# compose-lab
+# compose-lab 🚧
 
-A Jetpack Compose playground.
+
+🚧 A Jetpack Compose playground 🚧
