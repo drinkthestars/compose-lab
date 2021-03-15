@@ -38,6 +38,7 @@ fun DragWrappingAndroidView() {
     val offsetX = remember { mutableStateOf(0f) }
     val offsetY = remember { mutableStateOf(0f) }
     var size by remember { mutableStateOf(Size.Zero) }
+    var cardSize by remember { mutableStateOf(Size.Zero) }
     Box(
         Modifier.fillMaxSize()
             .background(color = Color.LightGray)
@@ -47,14 +48,15 @@ fun DragWrappingAndroidView() {
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier
                 .fillMaxSize(0.6f)
+                .onSizeChanged { cardSize = size }
                 .offset { IntOffset(offsetX.value.roundToInt(), offsetY.value.roundToInt()) }
                 .pointerInput(Unit) {
                     detectDragGestures { change, dragAmount ->
                         val original = Offset(offsetX.value, offsetY.value)
                         val summed = original + dragAmount
                         val newValue = Offset(
-                            x = summed.x.coerceIn(0f, size.width - 50.dp.toPx()),
-                            y = summed.y.coerceIn(0f, size.height - 50.dp.toPx())
+                            x = summed.x.coerceIn(0f, size.width - cardSize.width),
+                            y = summed.y.coerceIn(0f, size.height - cardSize.height)
                         )
                         change.consumePositionChange()
                         offsetX.value = newValue.x
