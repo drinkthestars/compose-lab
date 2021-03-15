@@ -1,4 +1,4 @@
-package com.goofy.goober.composelab.activity.gifs
+package com.goofy.goober.composelab.gifs
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,13 +30,13 @@ fun GifResults(gifSearchResults: List<Media>) {
                     elevation = 3.dp,
                     modifier = Modifier.height(250.dp).padding(12.dp)
                 ) {
-                    GlideImage(
-                        modifier = Modifier.fillMaxSize(),
-                        requestBuilder = { apply(RequestOptions().centerCrop()) },
-                        data = item.images.downsizedMedium?.gifUrl.orEmpty(),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop
-                    )
+    GlideImage(
+        modifier = Modifier.fillMaxSize(),
+        requestBuilder = { apply(RequestOptions().centerCrop()) },
+        data = item.images.downsizedMedium?.gifUrl.orEmpty(),
+        contentDescription = null,
+        contentScale = ContentScale.Crop
+    )
                 }
             }
         }

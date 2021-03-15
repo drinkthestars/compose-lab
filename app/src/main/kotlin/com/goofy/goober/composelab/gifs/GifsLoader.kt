@@ -1,4 +1,4 @@
-package com.goofy.goober.composelab.activity.gifs
+package com.goofy.goober.composelab.gifs
 
 import com.giphy.sdk.core.models.Media
 import com.giphy.sdk.core.models.enums.MediaType

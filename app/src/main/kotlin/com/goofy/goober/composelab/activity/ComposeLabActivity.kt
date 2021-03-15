@@ -8,7 +8,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.giphy.sdk.ui.Giphy
-import com.goofy.goober.composelab.activity.gifs.GifSearch
+import com.goofy.goober.composelab.gifs.GifSearch
 
 class ComposeLabActivity : AppCompatActivity() {
 

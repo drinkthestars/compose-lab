@@ -1,4 +1,4 @@
-package com.goofy.goober.composelab.activity.gestures
+package com.goofy.goober.composelab.gestures
 
 import android.content.Context
 import android.util.AttributeSet
