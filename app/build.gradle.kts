@@ -59,10 +59,14 @@ dependencies {
     implementation(Libs.Coroutines.core)
     implementation(Libs.material)
 
+    implementation(Libs.Accompanist.glide)
+    implementation(Libs.Accompanist.insets)
+
+    implementation(Libs.AndroidX.appCompat)
     implementation(Libs.AndroidX.coreKtx)
+    implementation(Libs.AndroidX.constraintLayout)
     implementation(Libs.AndroidX.Activity.activityCompose)
     implementation(Libs.AndroidX.Lifecycle.viewModelCompose)
-    implementation(Libs.AndroidX.ConstraintLayout.constraintLayoutCompose)
 
     implementation(Libs.AndroidX.Compose.runtime)
     implementation(Libs.AndroidX.Compose.foundation)
@@ -70,6 +74,7 @@ dependencies {
     implementation(Libs.AndroidX.Compose.ui)
     implementation(Libs.AndroidX.Compose.uiUtil)
     implementation(Libs.AndroidX.Compose.material)
+    implementation(Libs.AndroidX.Compose.navigation)
     implementation(Libs.AndroidX.Compose.animation)
     implementation(Libs.AndroidX.Compose.iconsExtended)
     implementation(Libs.AndroidX.Compose.tooling)

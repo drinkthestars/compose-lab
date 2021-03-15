@@ -1,5 +1,5 @@
 object AppConfig {
-    const val applicationId = "com.goofy.goober.androidtemplate"
+    const val applicationId = "com.goofy.goober.composelab"
     const val compileSdk = 30
     const val minSdk = 24
     const val targetSdk = 30
