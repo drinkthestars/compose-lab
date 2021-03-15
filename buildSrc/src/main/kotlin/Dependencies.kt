@@ -13,6 +13,10 @@ object Libs {
     const val junit = "junit:junit:4.13"
     const val material = "com.google.android.material:material:1.1.0"
 
+    object Giphy {
+        const val ui = "com.giphy.sdk:ui:2.0.9"
+    }
+
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Project.Kotlin.version}"
     }

@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">compose-lab</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">ComposeLab</string>
 </resources>

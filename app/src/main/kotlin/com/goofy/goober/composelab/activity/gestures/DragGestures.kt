@@ -37,26 +37,26 @@ import kotlin.math.roundToInt
 fun DragWrappingAndroidView() {
     val offsetX = remember { mutableStateOf(0f) }
     val offsetY = remember { mutableStateOf(0f) }
-    var size by remember { mutableStateOf(Size.Zero) }
+    var boxSize by remember { mutableStateOf(Size.Zero) }
     var cardSize by remember { mutableStateOf(Size.Zero) }
     Box(
         Modifier.fillMaxSize()
             .background(color = Color.LightGray)
-            .onSizeChanged { size = it.toSize() }
+            .onSizeChanged { boxSize = it.toSize() }
     ) {
         Card(
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier
                 .fillMaxSize(0.6f)
-                .onSizeChanged { cardSize = size }
+                .onSizeChanged { cardSize = boxSize }
                 .offset { IntOffset(offsetX.value.roundToInt(), offsetY.value.roundToInt()) }
                 .pointerInput(Unit) {
                     detectDragGestures { change, dragAmount ->
                         val original = Offset(offsetX.value, offsetY.value)
                         val summed = original + dragAmount
                         val newValue = Offset(
-                            x = summed.x.coerceIn(0f, size.width - cardSize.width),
-                            y = summed.y.coerceIn(0f, size.height - cardSize.height)
+                            x = summed.x.coerceIn(0f, boxSize.width - cardSize.width),
+                            y = summed.y.coerceIn(0f, boxSize.height - cardSize.height)
                         )
                         change.consumePositionChange()
                         offsetX.value = newValue.x

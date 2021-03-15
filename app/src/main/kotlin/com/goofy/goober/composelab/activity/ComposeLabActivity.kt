@@ -7,13 +7,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.goofy.goober.composelab.activity.gestures.DragWrappingAndroidView
+import com.giphy.sdk.ui.Giphy
+import com.goofy.goober.composelab.activity.gifs.GifSearch
 
-class MainActivity : AppCompatActivity() {
+class ComposeLabActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Giphy.configure(this, "odQumPBsMVYt0fGMipX26ElepU3KtRXo")
         setContent {
             ComposeLabApp()
         }
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     @Composable
     fun ComposeLabApp() {
         Surface(modifier = Modifier.fillMaxSize()) {
-            DragWrappingAndroidView()
+            GifSearch()
         }
     }
 }

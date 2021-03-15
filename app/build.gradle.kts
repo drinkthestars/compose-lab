@@ -79,6 +79,8 @@ dependencies {
     implementation(Libs.AndroidX.Compose.iconsExtended)
     implementation(Libs.AndroidX.Compose.tooling)
 
+    implementation(Libs.Giphy.ui)
+
     androidTestImplementation(Libs.junit)
     androidTestImplementation(Libs.AndroidX.Test.core)
     androidTestImplementation(Libs.AndroidX.Test.espressoCore)
