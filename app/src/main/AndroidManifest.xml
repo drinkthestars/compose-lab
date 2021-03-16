@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeLab">
         <activity
-            android:name="com.goofy.goober.composelab.activity.ComposeLabActivity"
+            android:name="com.goofy.goober.composelab.activity.LabActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.ComposeLab.NoActionBar">
             <intent-filter>

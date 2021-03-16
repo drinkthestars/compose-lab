@@ -1,4 +1,4 @@
-package com.goofy.goober.composelab.gifs
+package com.goofy.goober.composelab.lists.gifs
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
