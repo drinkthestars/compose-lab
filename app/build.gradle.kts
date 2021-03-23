@@ -59,6 +59,7 @@ dependencies {
     implementation(Libs.Coroutines.core)
     implementation(Libs.material)
 
+    implementation(Libs.Accompanist.coil)
     implementation(Libs.Accompanist.glide)
     implementation(Libs.Accompanist.insets)
 
@@ -79,6 +80,7 @@ dependencies {
     implementation(Libs.AndroidX.Compose.iconsExtended)
     implementation(Libs.AndroidX.Compose.tooling)
 
+    implementation(Libs.Coil.gif)
     implementation(Libs.Giphy.ui)
 
     androidTestImplementation(Libs.junit)

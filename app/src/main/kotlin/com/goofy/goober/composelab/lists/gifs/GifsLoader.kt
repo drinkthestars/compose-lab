@@ -21,5 +21,5 @@ suspend fun loadGifs(query: String) = suspendCancellableCoroutine<List<Media>> {
         search = query,
         mediaType = MediaType.gif,
         ratingType = RatingType.pg13
-    ).queryGifs(offset = 0, completionHandler = completionHandler)
+    ).queryGifs(offset = 0, completionHandler)
 }

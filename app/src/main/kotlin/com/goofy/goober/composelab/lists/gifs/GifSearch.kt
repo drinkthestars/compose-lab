@@ -42,7 +42,8 @@ import androidx.compose.ui.unit.dp
 import com.giphy.sdk.core.models.Media
 
 /**
- * Inpo: https://github.com/android/compose-samples/blob/92f2f16e4e63fa0e4418f660dde9e9558674cee5/Jetsnack/app/src/main/java/com/example/jetsnack/ui/home/search/Search.kt
+ * Inspo:
+ * https://github.com/android/compose-samples/blob/92f2f16e4e63fa0e4418f660dde9e9558674cee5/Jetsnack/app/src/main/java/com/example/jetsnack/ui/home/search/Search.kt
  */
 @Composable
 fun GifSearch(

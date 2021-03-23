@@ -28,6 +28,10 @@ object Libs {
         const val insets = "dev.chrisbanes.accompanist:accompanist-insets:$version"
     }
 
+    object Coil {
+        const val gif = "io.coil-kt:coil-gif:1.0.0"
+    }
+
     object Coroutines {
         private const val version = "1.4.3"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
