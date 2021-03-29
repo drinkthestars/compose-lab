@@ -7,6 +7,14 @@ sealed class Screen {
         override val route: String = "Labs Home"
     }
 
+    object Starfield: Screen() {
+        override val route: String = "Starfield"
+    }
+
+    object MiscLab: Screen() {
+        override val route: String = "Misc"
+    }
+
     sealed class Gestures: Screen() {
         object DragAndroidView: Gestures() {
             override val route: String = "Drag Android View"
