@@ -15,6 +15,7 @@ import com.goofy.goober.composelab.ComposableLab
 import com.goofy.goober.composelab.LabScaffold
 import com.goofy.goober.composelab.MiscLab
 import com.goofy.goober.composelab.Screen
+import com.goofy.goober.composelab.cube.CubeLab
 import com.goofy.goober.composelab.lists.gifs.GifSearchLab
 import com.goofy.goober.composelab.starfield.Starfield
 import com.google.accompanist.systemuicontroller.LocalSystemUiController
@@ -53,6 +54,7 @@ class LabActivity : ComponentActivity() {
         ) {
             composable(Screen.Lists.GiphyGifSearch.route) { GifSearchLab() }
             composable(Screen.Starfield.route) { Starfield() }
+            composable(Screen.Cube.route) { CubeLab() }
             composable(Screen.MiscLab.route) { MiscLab() }
         }
     }
@@ -60,6 +62,7 @@ class LabActivity : ComponentActivity() {
 
 private val MainLabs = listOf(
     ComposableLab(screen = Screen.Starfield),
+    ComposableLab(screen = Screen.Cube),
     ComposableLab(screen = Screen.Lists.GiphyGifSearch),
     ComposableLab(screen = Screen.MiscLab)
 )
