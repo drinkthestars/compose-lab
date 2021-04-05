@@ -1,7 +1,5 @@
 package com.goofy.goober.composelab.starfield
 
-import android.app.Activity
-import android.content.Context
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
@@ -21,7 +19,6 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawTransform
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.goofy.goober.composelab.map
@@ -31,7 +28,6 @@ private const val MaxSpeed = 45f
 
 @Composable
 fun Starfield() {
-    setupStatusAndNavBars(LocalContext.current)
     val density = LocalDensity.current
     val config = LocalConfiguration.current
     val screenWidthPx = with(density) { config.screenWidthDp.dp.toPx() }
@@ -43,13 +39,12 @@ fun Starfield() {
     val stars = remember { initStars(size = 700, screenWidthPx, screenHeightPx) }
     var currentSpeed by remember { mutableStateOf(15f) }
 
-    LaunchedEffect(Unit) {
-        do {
-            withFrameNanos { stars.forEach { it.draw(currentSpeed) } }
-        } while (true)
+    DrawEffect {
+        stars.forEach { it.draw(currentSpeed) }
     }
 
-    Canvas(Modifier.fillMaxSize()
+    Canvas(Modifier
+        .fillMaxSize()
         .background(Color.Black)
         .draggable(
             orientation = Orientation.Vertical,
@@ -80,10 +75,13 @@ fun Starfield() {
     }
 }
 
-private fun setupStatusAndNavBars(context: Context) {
-    val window = (context as Activity).window
-    window.statusBarColor = Color.Black.value.toInt()
-    window.navigationBarColor = Color.Black.value.toInt()
+@Composable
+private fun DrawEffect(onFrame: (frameTimeMillis: Long) -> Unit) {
+    LaunchedEffect(Unit) {
+        do {
+            withFrameNanos(onFrame)
+        } while (true)
+    }
 }
 
 private fun initStars(

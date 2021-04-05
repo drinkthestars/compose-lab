@@ -26,6 +26,7 @@ object Libs {
         const val glide = "com.google.accompanist:accompanist-glide:$version"
         const val coil = "com.google.accompanist:accompanist-coil:$version"
         const val insets = "com.google.accompanist:accompanist-insets:$version"
+        const val systemUiController = "com.google.accompanist:accompanist-systemuicontroller:$version"
     }
 
     object Coil {

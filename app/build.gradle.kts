@@ -62,6 +62,7 @@ dependencies {
     implementation(Libs.Accompanist.coil)
     implementation(Libs.Accompanist.glide)
     implementation(Libs.Accompanist.insets)
+    implementation(Libs.Accompanist.systemUiController)
 
     implementation(Libs.AndroidX.appCompat)
     implementation(Libs.AndroidX.coreKtx)
