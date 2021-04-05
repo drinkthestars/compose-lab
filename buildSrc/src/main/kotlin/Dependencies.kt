@@ -1,5 +1,5 @@
 object Project {
-    private const val agpVersion = "7.0.0-alpha06"
+    private const val agpVersion = "7.0.0-alpha12"
     const val jvmTarget = "1.8"
     const val agp = "com.android.tools.build:gradle:$agpVersion"
 
@@ -22,14 +22,14 @@ object Libs {
     }
 
     object Accompanist {
-        private const val version = "0.6.2"
-        const val glide = "dev.chrisbanes.accompanist:accompanist-glide:$version"
-        const val coil = "dev.chrisbanes.accompanist:accompanist-coil:$version"
-        const val insets = "dev.chrisbanes.accompanist:accompanist-insets:$version"
+        private const val version = "0.7.0"
+        const val glide = "com.google.accompanist:accompanist-glide:$version"
+        const val coil = "com.google.accompanist:accompanist-coil:$version"
+        const val insets = "com.google.accompanist:accompanist-insets:$version"
     }
 
     object Coil {
-        const val gif = "io.coil-kt:coil-gif:1.0.0"
+        const val gif = "io.coil-kt:coil-gif:1.1.1"
     }
 
     object Coroutines {
@@ -42,10 +42,10 @@ object Libs {
     object AndroidX {
         const val coreKtx = "androidx.core:core-ktx:1.5.0-beta01"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
-        const val appCompat = "androidx.appcompat:appcompat:1.3.0-beta01"
+        const val appCompat = "androidx.appcompat:appcompat:1.3.0-rc01"
 
         object Compose {
-            const val version = "1.0.0-beta02"
+            const val version = "1.0.0-beta03"
 
             const val animation = "androidx.compose.animation:animation:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"

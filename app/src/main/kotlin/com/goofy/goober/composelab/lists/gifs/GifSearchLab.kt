@@ -9,7 +9,7 @@ import coil.ImageLoader
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.request.CachePolicy
-import dev.chrisbanes.accompanist.coil.LocalImageLoader
+import com.google.accompanist.coil.LocalImageLoader
 
 @Composable
 fun GifSearchLab(

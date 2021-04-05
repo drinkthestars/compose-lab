@@ -5,8 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -16,13 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.giphy.sdk.core.models.Media
-import dev.chrisbanes.accompanist.coil.CoilImage
+import com.google.accompanist.coil.CoilImage
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun GifResults(gifSearchResults: List<Media>) {
-    LazyVerticalGrid(
-        cells =  GridCells.Fixed(2),
+//    LazyVerticalGrid(
+//        cells =  GridCells.Fixed(2),
+    LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(12.dp)
     ) {
@@ -31,8 +31,18 @@ fun GifResults(gifSearchResults: List<Media>) {
                 Card(
                     shape = RoundedCornerShape(8.dp),
                     elevation = 3.dp,
-                    modifier = Modifier.height(150.dp).padding(12.dp)
+                    modifier = Modifier
+                        .height(250.dp)
+                        .padding(12.dp)
                 ) {
+                    // See https://github.com/google/accompanist/issues/241
+//                    GlideImage(
+//                        modifier = Modifier.fillMaxSize(),
+//                        requestBuilder = { apply(RequestOptions().centerCrop()) },
+//                        data = item.images.downsizedMedium?.gifUrl.orEmpty(),
+//                        contentDescription = null,
+//                        contentScale = ContentScale.Crop
+//                    )
                     CoilImage(
                         fadeIn = true,
                         modifier = Modifier.fillMaxSize(),
