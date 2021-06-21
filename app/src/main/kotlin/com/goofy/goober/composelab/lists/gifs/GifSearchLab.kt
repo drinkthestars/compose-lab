@@ -24,6 +24,8 @@ fun GifSearchLab(
 private fun coilImageLoader() = ImageLoader.Builder(LocalContext.current)
     .memoryCachePolicy(CachePolicy.ENABLED)
     .componentRegistry {
-        if (Build.VERSION.SDK_INT >= 28) add(ImageDecoderDecoder()) else add(GifDecoder())
+        if (Build.VERSION.SDK_INT >= 28) {
+            add(ImageDecoderDecoder(LocalContext.current))
+        } else add(GifDecoder())
     }
     .build()

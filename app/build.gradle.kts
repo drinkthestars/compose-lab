@@ -5,16 +5,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion(AppConfig.compileSdk)
-    buildToolsVersion(AppConfig.buildToolsVersion)
+    compileSdk = AppConfig.compileSdk
+    buildToolsVersion = AppConfig.buildToolsVersion
 
     defaultConfig {
         applicationId = AppConfig.applicationId
-        minSdkVersion(AppConfig.minSdk)
-        targetSdkVersion(AppConfig.targetSdk)
+        minSdk = AppConfig.minSdk
+        targetSdk = AppConfig.targetSdk
         versionCode = AppConfig.versionCode
         versionName = AppConfig.versionName
-
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
     }
 
@@ -76,10 +75,10 @@ dependencies {
     implementation(Libs.AndroidX.Compose.ui)
     implementation(Libs.AndroidX.Compose.uiUtil)
     implementation(Libs.AndroidX.Compose.material)
-    implementation(Libs.AndroidX.Compose.navigation)
     implementation(Libs.AndroidX.Compose.animation)
     implementation(Libs.AndroidX.Compose.iconsExtended)
     implementation(Libs.AndroidX.Compose.tooling)
+    implementation(Libs.AndroidX.Navigation.compose)
 
     implementation(Libs.Coil.gif)
     implementation(Libs.Giphy.ui)
@@ -98,5 +97,6 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         jvmTarget = Project.jvmTarget
         freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
         freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.Experimental"
+        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi"
     }
 }

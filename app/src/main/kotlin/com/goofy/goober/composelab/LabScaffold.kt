@@ -15,18 +15,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigate
-import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun LabScaffold(
+    navController: NavHostController,
     labs: List<Lab>,
     startDestination: Screen,
-    navGraph: NavGraphBuilder.() -> Unit,
+    navGraphBuilder: NavGraphBuilder.() -> Unit,
 ) {
-    val navController = rememberNavController()
     Surface {
         NavHost(navController, startDestination = startDestination.route) {
             composable(startDestination.route) {
@@ -42,7 +41,7 @@ fun LabScaffold(
                     }
                 })
             }
-            navGraph()
+            navGraphBuilder()
         }
     }
 }
@@ -57,9 +56,9 @@ private fun Labs(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        labs.forEach {
-            Button(onClick = { onClick(it) }) {
-                Text(it.title)
+        labs.forEach { lab ->
+            Button(onClick = { onClick(lab) }) {
+                Text(lab.title)
             }
             Spacer(modifier = Modifier.height(16.dp))
         }

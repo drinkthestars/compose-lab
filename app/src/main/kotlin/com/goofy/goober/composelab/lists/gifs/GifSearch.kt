@@ -34,7 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.isFocused
+//import androidx.compose.ui.focus.isFocused
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
@@ -43,7 +43,7 @@ import com.giphy.sdk.core.models.Media
 
 /**
  * Inspo:
- * https://github.com/android/compose-samples/blob/92f2f16e4e63fa0e4418f660dde9e9558674cee5/Jetsnack/app/src/main/java/com/example/jetsnack/ui/home/search/Search.kt
+ * https://github.com/android/compose-samples/Jetsnack/Search.kt
  */
 @Composable
 fun GifSearch(
@@ -167,7 +167,7 @@ private fun SearchBar(
                     modifier = Modifier
                         .weight(1f)
                         .onFocusChanged {
-                            onSearchFocusChange(it.isFocused)
+//                            onSearchFocusChange(it.isFocused)
                         }
                 )
                 if (searching) {

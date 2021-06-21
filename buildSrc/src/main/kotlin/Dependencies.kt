@@ -1,10 +1,10 @@
 object Project {
-    private const val agpVersion = "7.0.0-alpha12"
+    private const val agpVersion = "7.0.0-beta04"
     const val jvmTarget = "1.8"
     const val agp = "com.android.tools.build:gradle:$agpVersion"
 
     object Kotlin {
-        const val version = "1.4.31"
+        const val version = "1.5.10"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
     }
 }
@@ -22,7 +22,7 @@ object Libs {
     }
 
     object Accompanist {
-        private const val version = "0.7.0"
+        private const val version = "0.12.0"
         const val glide = "com.google.accompanist:accompanist-glide:$version"
         const val coil = "com.google.accompanist:accompanist-coil:$version"
         const val insets = "com.google.accompanist:accompanist-insets:$version"
@@ -30,7 +30,7 @@ object Libs {
     }
 
     object Coil {
-        const val gif = "io.coil-kt:coil-gif:1.1.1"
+        const val gif = "io.coil-kt:coil-gif:1.2.1"
     }
 
     object Coroutines {
@@ -46,14 +46,13 @@ object Libs {
         const val appCompat = "androidx.appcompat:appcompat:1.3.0-rc01"
 
         object Compose {
-            const val version = "1.0.0-beta03"
+            const val version = "1.0.0-beta09"
 
             const val animation = "androidx.compose.animation:animation:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"
             const val layout = "androidx.compose.foundation:foundation-layout:$version"
             const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
             const val material = "androidx.compose.material:material:$version"
-            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha09"
             const val runtime = "androidx.compose.runtime:runtime:$version"
             const val tooling = "androidx.compose.ui:ui-tooling:$version"
             const val ui = "androidx.compose.ui:ui:$version"
@@ -62,12 +61,19 @@ object Libs {
             const val uiTest = "androidx.compose.ui:ui-test-junit4:$version"
         }
 
+        object Navigation {
+            private const val version = "2.4.0-alpha03"
+            const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
+            const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
+            const val compose = "androidx.navigation:navigation-compose:$version"
+        }
+
         object Activity {
-            const val activityCompose = "androidx.activity:activity-compose:1.3.0-alpha03"
+            const val activityCompose = "androidx.activity:activity-compose:1.3.0-beta02"
         }
 
         object Lifecycle {
-            const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha013"
+            const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
         }
 
         object Test {

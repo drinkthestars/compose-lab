@@ -29,5 +29,8 @@ sealed class Screen {
         object GiphyGifSearch: Lists() {
             override val route: String = "Giphy Gif Search"
         }
+        object ItemAnimation: Lists() {
+            override val route: String = "Item Animations"
+        }
     }
 }
