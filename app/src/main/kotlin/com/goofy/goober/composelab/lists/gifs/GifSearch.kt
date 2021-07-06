@@ -184,8 +184,6 @@ private fun SearchBar(
     }
 }
 
-private val IconSize = 48.dp
-
 @Composable
 private fun SearchHint() {
     Row(

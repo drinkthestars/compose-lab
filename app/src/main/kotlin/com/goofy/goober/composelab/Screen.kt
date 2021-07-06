@@ -23,6 +23,12 @@ sealed class Screen {
         object DragAndroidView: Gestures() {
             override val route: String = "Drag Android View"
         }
+        object DragRotation3D: Gestures() {
+            override val route: String = "Drag Rotation 3D"
+        }
+        object Rotation3D: Gestures() {
+            override val route: String = "Rotation 3D"
+        }
     }
 
     sealed class Lists: Screen() {

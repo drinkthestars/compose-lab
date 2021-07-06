@@ -22,7 +22,7 @@ object Libs {
     }
 
     object Accompanist {
-        private const val version = "0.12.0"
+        private const val version = "0.13.0"
         const val glide = "com.google.accompanist:accompanist-glide:$version"
         const val coil = "com.google.accompanist:accompanist-coil:$version"
         const val insets = "com.google.accompanist:accompanist-insets:$version"
@@ -46,7 +46,7 @@ object Libs {
         const val appCompat = "androidx.appcompat:appcompat:1.3.0-rc01"
 
         object Compose {
-            const val version = "1.0.0-beta09"
+            const val version = "1.0.0-rc01"
 
             const val animation = "androidx.compose.animation:animation:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"
@@ -62,14 +62,14 @@ object Libs {
         }
 
         object Navigation {
-            private const val version = "2.4.0-alpha03"
+            private const val version = "2.4.0-alpha04"
             const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
             const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
             const val compose = "androidx.navigation:navigation-compose:$version"
         }
 
         object Activity {
-            const val activityCompose = "androidx.activity:activity-compose:1.3.0-beta02"
+            const val activityCompose = "androidx.activity:activity-compose:1.3.0-rc01"
         }
 
         object Lifecycle {

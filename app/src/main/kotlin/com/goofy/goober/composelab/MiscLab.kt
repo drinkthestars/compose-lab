@@ -1,7 +1,6 @@
 package com.goofy.goober.composelab
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.goofy.goober.composelab.gestures.DragWrappingAndroidView

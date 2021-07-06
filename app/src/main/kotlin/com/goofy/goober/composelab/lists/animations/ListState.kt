@@ -43,8 +43,10 @@ class ListState(initialItems: List<Item>) {
     }
 
     fun add(color: Color) {
+        val addIndex = selectedIndex ?: items.size
         items.add(
-            Item("${items.size + 1}", color)
+            addIndex,
+            Item("$addIndex", color)
         )
     }
 
