@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ColorItemContent(
     item: Item,
-    listState: ListState,
     onClick: () -> Unit
 ) {
     Column {
@@ -35,7 +34,8 @@ fun ColorItemContent(
             Text(
                 color = Color.Black,
                 textAlign = TextAlign.Center,
-                text = if (listState.selectedItem == item) "selected" else ""
+                text = ""
+//                text = if (listState.selectedItem == item) "selected" else ""
             )
         }
         Spacer(Modifier.height(16.dp))

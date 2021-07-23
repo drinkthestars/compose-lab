@@ -1,10 +1,11 @@
 package com.goofy.goober.composelab.lists.animations
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,50 +21,74 @@ import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.key
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.flow.collect
 import kotlin.random.Random
 
 @Preview
 @Composable
 private fun AnimatedVisibilityLazyColumnPreview() {
-    Surface {
-        AnimatedVisibilityLazyColumn()
-    }
+    AnimatedVisibilityLazyColumn()
 }
 
 @Composable
 fun AnimatedVisibilityLazyColumn() {
-    val listState = rememberListState(initialItems())
-    Column(Modifier.fillMaxSize()) {
-        Spacer(modifier = Modifier.height(78.dp))
-        Info(listState)
-        Spacer(modifier = Modifier.height(8.dp))
-        Controls(listState)
-        Spacer(modifier = Modifier.height(8.dp))
-        ColorList(listState)
+    Surface {
+        val store = remember { ItemSnapshots() }
+        AnimatedVisibilityLazyColumn(
+            snapshot = store(),
+            onAdd = { store.update(Update.Add(it)) },
+            onRemove = { store.update(Update.Remove) },
+        ) { store.update(Update.Clear) }
     }
 }
 
 @Composable
-private fun ColorList(listState: ListState) {
-    LaunchedEffect(listState) { listState.deletions().collect { listState.pruneItems() } }
+private fun AnimatedVisibilityLazyColumn(
+    snapshot: ItemSnapshot,
+    onAdd: (color: Color) -> Unit,
+    onRemove: () -> Unit,
+    onClear: () -> Unit,
+) {
+    Column(Modifier.fillMaxSize()) {
+        Spacer(modifier = Modifier.height(78.dp))
+        Info(snapshot)
+        Spacer(modifier = Modifier.height(8.dp))
+        Controls(snapshot, onAdd, onRemove, onClear)
+        Spacer(modifier = Modifier.height(8.dp))
+        ColorList(snapshot)
+    }
+}
+
+@Composable
+private fun ColorList(itemSnapshot: ItemSnapshot) {
+    val removals = remember { mutableMapOf<Item, String>() }
     LazyColumn {
-        itemsIndexed(listState.items) { _, item ->
-            key(item) {
-                AnimatedVisibility(
-                    visibleState = item.visibilityTransitionState,
-                    exit = exitTransition(),
-                    enter = enterTransition()
-                ) {
-                    ColorItemContent(item, listState) { listState.selectedItem = item }
+        itemsIndexed(itemSnapshot.items, key = { _, item -> item.id }) { _, item ->
+            val visibility = remember(item.id) {
+                MutableTransitionState(initialState = item.status != Item.Status.Visible)
+            }
+
+            SideEffect {
+                (item.status == Item.Status.Visible).let {
+                    if (!it) removals[item] = "removed"
+                    visibility.targetState = it
+                }
+            }
+
+            AnimatedVisibility(
+                visibleState = visibility,
+                exit = exitTransition(),
+                enter = enterTransition()
+            ) {
+                ColorItemContent(item) {
+//                        listState.selectedItem = item
                 }
             }
         }
@@ -71,54 +96,59 @@ private fun ColorList(listState: ListState) {
 }
 
 @Composable
-private fun Controls(listState: ListState) {
+private fun Controls(
+    snapshot: ItemSnapshot,
+    onAdd: (color: Color) -> Unit,
+    onRemove: () -> Unit,
+    onClear: () -> Unit,
+) {
     Row(Modifier.fillMaxWidth()) {
         ControlButton(
             modifier = Modifier.weight(1f),
             text = "Add",
-            onClick = { listState.add(randomColor()) }
+            onClick = { onAdd(randomColor()) }
         )
         ControlButton(
             modifier = Modifier.weight(1f),
             text = "Remove",
-            enabled = !listState.isEmpty,
-            onClick = { listState.removeLast() }
+            enabled = snapshot.items.isNotEmpty(),
+            onClick = { onRemove() }
         )
         ControlButton(
             modifier = Modifier.weight(1f),
             text = "Clear All",
-            enabled = !listState.isEmpty,
-            onClick = { listState.clear() }
+            enabled = snapshot.items.isNotEmpty(),
+            onClick = { onClear() }
         )
     }
 }
 
 @Composable
-private fun Info(listState: ListState) {
+private fun Info(snapshot: ItemSnapshot) {
     Column(
         Modifier
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(
-                textAlign = TextAlign.Center,
-                color = Color.Black,
-                fontSize = 13.sp,
-                modifier = Modifier.weight(1f),
-                text = "last removal at = ${listState.removalIndex}"
-            )
-            Text(
-                textAlign = TextAlign.Center,
-                color = Color.Black,
-                fontSize = 13.sp,
-                modifier = Modifier.weight(1f),
-                text = "selected at = ${listState.selectedIndex}"
-            )
-        }
+//        Row(
+//            horizontalArrangement = Arrangement.Center,
+//            modifier = Modifier.fillMaxWidth()
+//        ) {
+//            Text(
+//                textAlign = TextAlign.Center,
+//                color = Color.Black,
+//                fontSize = 13.sp,
+//                modifier = Modifier.weight(1f),
+//                text = "last removal at = ${listState.removalIndex}"
+//            )
+//            Text(
+//                textAlign = TextAlign.Center,
+//                color = Color.Black,
+//                fontSize = 13.sp,
+//                modifier = Modifier.weight(1f),
+//                text = "selected at = ${listState.selectedIndex}"
+//            )
+//        }
         Spacer(modifier = Modifier.height(12.dp))
         Row(
             horizontalArrangement = Arrangement.Center,
@@ -129,7 +159,7 @@ private fun Info(listState: ListState) {
                 color = Color.Black,
                 fontSize = 13.sp,
                 modifier = Modifier.weight(1f),
-                text = "items # = ${listState.items.size}"
+                text = "items # = ${snapshot.items.size}"
             )
         }
     }
@@ -152,23 +182,13 @@ private fun ControlButton(
 }
 
 @Composable
-private fun enterTransition() = expandVertically(
-    animationSpec = spring(
-        stiffness = Spring.StiffnessVeryLow
-    )
+private fun enterTransition() = slideInHorizontally(
+    animationSpec = spring(stiffness = Spring.StiffnessVeryLow)
 )
 
 @Composable
-private fun exitTransition() = shrinkVertically(
-    animationSpec = spring(
-        stiffness = Spring.StiffnessMedium
-    )
+private fun exitTransition() = slideOutHorizontally(
+    animationSpec = spring(stiffness = Spring.StiffnessVeryLow)
 )
 
-private fun randomColor() = Color(Random.nextFloat(), Random.nextFloat(), Random.nextFloat())
-
-private fun initialItems() = listOf(
-    Item("0", Color(0xffBCF8FF), animateInitialVisibility = false),
-    Item("1", Color(0xff8AEAE9), animateInitialVisibility = false),
-    Item("2", Color(0xff46CECA), animateInitialVisibility = false)
-)
+fun randomColor() = Color(Random.nextFloat(), Random.nextFloat(), Random.nextFloat())

@@ -1,5 +1,5 @@
 object Project {
-    private const val agpVersion = "7.0.0-beta04"
+    private const val agpVersion = "7.0.0-beta05"
     const val jvmTarget = "1.8"
     const val agp = "com.android.tools.build:gradle:$agpVersion"
 

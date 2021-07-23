@@ -19,6 +19,7 @@ import com.goofy.goober.composelab.cube.CubeLab
 import com.goofy.goober.composelab.gestures.DragRotation3D
 import com.goofy.goober.composelab.gestures.InfiniteRotation3D
 import com.goofy.goober.composelab.lists.animations.AnimatedVisibilityLazyColumn
+import com.goofy.goober.composelab.lists.animations.DynamicShowHideItemAnimation
 import com.goofy.goober.composelab.lists.gifs.GifSearchLab
 import com.goofy.goober.composelab.starfield.Starfield
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -55,6 +56,7 @@ class LabActivity : ComponentActivity() {
         ) {
             composable(Screen.Lists.GiphyGifSearch.route) { GifSearchLab() }
             composable(Screen.Lists.ItemAnimation.route) { AnimatedVisibilityLazyColumn() }
+            composable(Screen.Lists.DynamicShowHideItemAnimation.route) { DynamicShowHideItemAnimation() }
             composable(Screen.Starfield.route) { Starfield() }
             composable(Screen.Cube.route) { CubeLab() }
             composable(Screen.Gestures.DragRotation3D.route) { DragRotation3D() }
@@ -69,6 +71,7 @@ private val MainLabs = listOf(
     ComposableLab(screen = Screen.Cube),
     ComposableLab(screen = Screen.Lists.GiphyGifSearch),
     ComposableLab(screen = Screen.Lists.ItemAnimation),
+    ComposableLab(screen = Screen.Lists.DynamicShowHideItemAnimation),
     ComposableLab(screen = Screen.Gestures.DragRotation3D),
     ComposableLab(screen = Screen.Gestures.Rotation3D),
     ComposableLab(screen = Screen.MiscLab)

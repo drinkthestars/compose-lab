@@ -38,5 +38,8 @@ sealed class Screen {
         object ItemAnimation: Lists() {
             override val route: String = "Item Animations"
         }
+        object DynamicShowHideItemAnimation: Lists() {
+            override val route: String = "Dynamic Item Animations"
+        }
     }
 }
