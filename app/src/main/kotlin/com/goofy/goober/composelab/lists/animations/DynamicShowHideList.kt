@@ -42,15 +42,15 @@ import java.util.UUID
 fun DynamicShowHideItemAnimation() {
     Box(modifier = Modifier.fillMaxSize()) {
         val list = remember { VinylImages.map { ListItem(painterRes = it) } }
-        Controls(list)
-        List(list)
+        List(list, modifier = Modifier.align(Alignment.TopCenter))
+        Controls(list, modifier = Modifier.align(Alignment.BottomCenter))
     }
 }
 
 @Composable
-private fun BoxScope.List(list: List<ListItem>) {
+private fun BoxScope.List(list: List<ListItem>, modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier.Companion.align(Alignment.Center),
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         list.forEach { item ->
@@ -75,7 +75,7 @@ private fun BoxScope.List(list: List<ListItem>) {
 
 @Composable
 private fun Controls(
-    list: List<ListItem>
+    list: List<ListItem>, modifier: Modifier = Modifier
 ) {
     var topIndex by remember { mutableStateOf(list.size - 1) }
     InfoAndControls(
@@ -97,7 +97,8 @@ private fun Controls(
                 inDirection.value = inDirection.value.next()
                 outDirection.value = outDirection.value.next()
             }
-        }
+        },
+        modifier = modifier
     )
 }
 
@@ -106,10 +107,11 @@ private fun InfoAndControls(
     state: VisibilityState,
     onRemoveClick: () -> Unit,
     onRestoreClick: () -> Unit,
-    onDirectionChange: () -> Unit
+    onDirectionChange: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(
-        Modifier
+        modifier
             .fillMaxWidth()
             .wrapContentHeight(),
         horizontalAlignment = Alignment.CenterHorizontally,
