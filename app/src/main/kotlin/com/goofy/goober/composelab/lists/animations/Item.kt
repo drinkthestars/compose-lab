@@ -9,7 +9,7 @@ class Item(
     var status: Status = Status.Visible
 
     sealed class Status {
-        object Gone: Status()
-        object Visible: Status()
+        object Gone : Status()
+        object Visible : Status()
     }
 }

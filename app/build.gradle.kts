@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-android")
+    id("io.gitlab.arturbosch.detekt") version "1.19.0-RC1"
+    id("app.cash.molecule")
 }
 
 android {
@@ -52,14 +54,19 @@ android {
     }
 }
 
+detekt {
+    // Define the detekt configuration(s) you want to use.
+    // Defaults to the default detekt configuration.
+    config = files("detekt-config.yml")
+    buildUponDefaultConfig = true
+}
+
 dependencies {
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.Coroutines.android)
     implementation(Libs.Coroutines.core)
     implementation(Libs.material)
 
-    implementation(Libs.Accompanist.coil)
-    implementation(Libs.Accompanist.glide)
     implementation(Libs.Accompanist.insets)
     implementation(Libs.Accompanist.systemUiController)
 
@@ -68,6 +75,8 @@ dependencies {
     implementation(Libs.AndroidX.constraintLayout)
     implementation(Libs.AndroidX.Activity.activityCompose)
     implementation(Libs.AndroidX.Lifecycle.viewModelCompose)
+    implementation(Libs.AndroidX.Lifecycle.viewModelKtx)
+    implementation(Libs.AndroidX.Lifecycle.viewModelSavedState)
 
     implementation(Libs.AndroidX.Compose.runtime)
     implementation(Libs.AndroidX.Compose.foundation)
@@ -78,10 +87,13 @@ dependencies {
     implementation(Libs.AndroidX.Compose.animation)
     implementation(Libs.AndroidX.Compose.iconsExtended)
     implementation(Libs.AndroidX.Compose.tooling)
+    implementation(Libs.AndroidX.Hilt.navCompose)
     implementation(Libs.AndroidX.Navigation.compose)
 
     implementation(Libs.Coil.gif)
+    implementation(Libs.Coil.compose)
     implementation(Libs.Giphy.ui)
+    implementation(Libs.Glide.core)
 
     androidTestImplementation(Libs.junit)
     androidTestImplementation(Libs.AndroidX.Test.core)
@@ -97,6 +109,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         jvmTarget = Project.jvmTarget
         freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
         freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.Experimental"
-        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi"
+        freeCompilerArgs =
+            freeCompilerArgs + "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi"
     }
 }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,6 +20,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
@@ -33,9 +33,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.goofy.goober.composelab.R
+import com.goofy.goober.composelab.animations.Direction
 import com.goofy.goober.composelab.animations.DirectionalSlideInOut
 import com.goofy.goober.composelab.animations.VisibilityState
-import com.goofy.goober.composelab.animations.next
 import java.util.UUID
 
 @Composable
@@ -48,7 +48,7 @@ fun DynamicShowHideItemAnimation() {
 }
 
 @Composable
-private fun BoxScope.List(list: List<ListItem>, modifier: Modifier = Modifier) {
+private fun List(list: List<ListItem>, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
@@ -75,7 +75,8 @@ private fun BoxScope.List(list: List<ListItem>, modifier: Modifier = Modifier) {
 
 @Composable
 private fun Controls(
-    list: List<ListItem>, modifier: Modifier = Modifier
+    list: List<ListItem>,
+    modifier: Modifier = Modifier
 ) {
     var topIndex by remember { mutableStateOf(list.size - 1) }
     InfoAndControls(
@@ -140,8 +141,29 @@ private fun InfoAndControls(
             }
         }
         Spacer(modifier = Modifier.height(40.dp))
-        Text(text = "in=${state.inDirection.value.javaClass.simpleName}  out=${state.outDirection.value.javaClass.simpleName}")
+        Text(text = "in=${state.inDirection.value.javaClass.simpleName}  " +
+                "out=${state.outDirection.value.javaClass.simpleName}")
         Spacer(modifier = Modifier.height(80.dp))
+    }
+}
+
+@Stable
+private fun Direction.In.next(): Direction.In {
+    return when (this) {
+        Direction.In.Left -> Direction.In.Right
+        Direction.In.Right -> Direction.In.Up
+        Direction.In.Up -> Direction.In.Down
+        Direction.In.Down -> Direction.In.Left
+    }
+}
+
+@Stable
+private fun Direction.Out.next(): Direction.Out {
+    return when (this) {
+        Direction.Out.Left -> Direction.Out.Right
+        Direction.Out.Right -> Direction.Out.Up
+        Direction.Out.Up -> Direction.Out.Down
+        Direction.Out.Down -> Direction.Out.Left
     }
 }
 

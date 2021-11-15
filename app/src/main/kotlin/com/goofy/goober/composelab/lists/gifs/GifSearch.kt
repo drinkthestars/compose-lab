@@ -58,7 +58,6 @@ fun GifSearch(
                 query = state.query,
                 onQueryChange = { state.query = it },
                 searchFocused = state.focused,
-                onSearchFocusChange = { state.focused = it },
                 onClearQuery = { state.query = TextFieldValue(text = "") },
                 onRefresh = { refresh++ },
                 searching = state.searching
@@ -123,7 +122,6 @@ private fun SearchBar(
     query: TextFieldValue,
     onQueryChange: (TextFieldValue) -> Unit,
     searchFocused: Boolean,
-    onSearchFocusChange: (Boolean) -> Unit,
     onClearQuery: () -> Unit,
     onRefresh: () -> Unit,
     searching: Boolean,

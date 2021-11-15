@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -26,22 +27,24 @@ fun LabScaffold(
     startDestination: Screen,
     navGraphBuilder: NavGraphBuilder.() -> Unit,
 ) {
-    Surface {
-        NavHost(navController, startDestination = startDestination.route) {
-            composable(startDestination.route) {
-                val context = LocalContext.current
-                Labs(labs, onClick = {
-                    when (it) {
-                        is ActivityLab<*> -> {
-                            context.startActivity(Intent(context, it.activityClass.java))
+    MaterialTheme {
+        Surface {
+            NavHost(navController, startDestination = startDestination.route) {
+                composable(startDestination.route) {
+                    val context = LocalContext.current
+                    Labs(labs, onClick = {
+                        when (it) {
+                            is ActivityLab<*> -> {
+                                context.startActivity(Intent(context, it.activityClass.java))
+                            }
+                            is ComposableLab -> {
+                                navController.navigate(it.screen.route)
+                            }
                         }
-                        is ComposableLab -> {
-                            navController.navigate(it.screen.route)
-                        }
-                    }
-                })
+                    })
+                }
+                navGraphBuilder()
             }
-            navGraphBuilder()
         }
     }
 }

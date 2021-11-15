@@ -44,7 +44,7 @@ class CubeState(
             animatedCubeAngle.animateTo(
                 targetValue = 360f,
                 animationSpec = infiniteRepeatable(
-                    animation = tween(999900, easing = LinearEasing),
+                    animation = tween(durationMillis = 999900, easing = LinearEasing),
                     repeatMode = RepeatMode.Reverse
                 )
             )

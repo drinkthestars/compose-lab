@@ -22,11 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 
 private const val RotationDeg = 90f
+private const val OffsetMultiplier = 3
 
 @Composable
 fun DirectionalSlideInOut(
-    modifier: Modifier = Modifier,
     state: VisibilityState,
+    modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit
 ) {
     AnimatedVisibility(
@@ -65,45 +66,42 @@ fun DirectionalSlideInOut(
 }
 
 @Stable
-fun Direction.In.enterTransition(): EnterTransition = run {
-    when (this) {
-        Direction.In.Left -> slideInHorizontally(
-            { -it * 3 },
-            animationSpec = spring(stiffness = Spring.StiffnessLow)
-        )
-        Direction.In.Right -> slideInHorizontally(
-            { it * 3 },
-            animationSpec = spring(stiffness = Spring.StiffnessLow)
-        )
-        Direction.In.Up -> slideInVertically(
-            { -it },
-            animationSpec = spring(stiffness = Spring.StiffnessLow)
-        )
-        Direction.In.Down -> slideInVertically(
-            { it },
-            animationSpec = spring(stiffness = Spring.StiffnessLow)
-        )
-    }
+private fun Direction.In.enterTransition(): EnterTransition = when (this) {
+    Direction.In.Left -> slideInHorizontally(
+        animationSpec = spring(stiffness = Spring.StiffnessLow),
+        initialOffsetX = { -it * OffsetMultiplier })
+    Direction.In.Right -> slideInHorizontally(
+        animationSpec = spring(stiffness = Spring.StiffnessLow),
+        initialOffsetX = { it * OffsetMultiplier }
+    )
+    Direction.In.Up -> slideInVertically(
+        animationSpec = spring(stiffness = Spring.StiffnessLow),
+        initialOffsetY = { -it }
+    )
+    Direction.In.Down -> slideInVertically(
+        animationSpec = spring(stiffness = Spring.StiffnessLow),
+        initialOffsetY = { it }
+    )
 }
 
 @Stable
-fun Direction.Out.exitTransition(): ExitTransition = run {
+private fun Direction.Out.exitTransition(): ExitTransition = run {
     when (this) {
         Direction.Out.Left -> slideOutHorizontally(
-            { -it * 3 },
-            animationSpec = spring(stiffness = Spring.StiffnessLow)
+            animationSpec = spring(stiffness = Spring.StiffnessLow),
+            targetOffsetX = { -it * OffsetMultiplier }
         )
         Direction.Out.Right -> slideOutHorizontally(
-            { it * 3 },
-            animationSpec = spring(stiffness = Spring.StiffnessLow)
+            animationSpec = spring(stiffness = Spring.StiffnessLow),
+            targetOffsetX = { it * OffsetMultiplier }
         )
         Direction.Out.Up -> slideOutVertically(
-            { -it * 3 },
-            animationSpec = spring(stiffness = Spring.StiffnessLow)
+            animationSpec = spring(stiffness = Spring.StiffnessLow),
+            targetOffsetY = { -it * OffsetMultiplier }
         )
         Direction.Out.Down -> slideOutVertically(
-            { it * 3 },
-            animationSpec = spring(stiffness = Spring.StiffnessLow)
+            animationSpec = spring(stiffness = Spring.StiffnessLow),
+            targetOffsetY = { it * OffsetMultiplier }
         )
     }
 }
@@ -113,26 +111,6 @@ class VisibilityState {
     val visibility = MutableTransitionState(initialState = false).apply { targetState = true }
     var inDirection = mutableStateOf<Direction.In>(Direction.In.Left)
     var outDirection = mutableStateOf<Direction.Out>(Direction.Out.Left)
-}
-
-@Stable
-fun Direction.In.next(): Direction.In {
-    return when (this) {
-        Direction.In.Left -> Direction.In.Right
-        Direction.In.Right -> Direction.In.Up
-        Direction.In.Up -> Direction.In.Down
-        Direction.In.Down -> Direction.In.Left
-    }
-}
-
-@Stable
-fun Direction.Out.next(): Direction.Out {
-    return when (this) {
-        Direction.Out.Left -> Direction.Out.Right
-        Direction.Out.Right -> Direction.Out.Up
-        Direction.Out.Up -> Direction.Out.Down
-        Direction.Out.Down -> Direction.Out.Left
-    }
 }
 
 @Stable

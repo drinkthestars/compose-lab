@@ -17,10 +17,10 @@ import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
 import com.giphy.sdk.core.models.Media
-import com.google.accompanist.glide.rememberGlidePainter
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, coil.annotation.ExperimentalCoilApi::class)
 @Composable
 fun GifResults(gifSearchResults: List<Media>) {
     LazyVerticalGrid(
@@ -41,9 +41,11 @@ fun GifResults(gifSearchResults: List<Media>) {
                         modifier = Modifier
                             .wrapContentHeight()
                             .fillMaxWidth(),
-                        painter = rememberGlidePainter(
-                            fadeIn = true,
-                            request = item.images.downsizedMedium?.gifUrl.orEmpty(),
+                        painter = rememberImagePainter(
+                            data = item.images.downsizedMedium?.gifUrl.orEmpty(),
+                            builder = {
+                                crossfade(true)
+                            },
                         ),
                         contentScale = ContentScale.FillWidth,
                         contentDescription = item.images.downsizedMedium?.gifUrl.orEmpty(),

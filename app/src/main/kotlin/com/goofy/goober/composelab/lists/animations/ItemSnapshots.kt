@@ -65,7 +65,7 @@ sealed class Update {
 }
 
 fun initialItems() = listOf(
-    Item("0", Color(0xffBCF8FF)),
-    Item("1", Color(0xff8AEAE9)),
-    Item("2", Color(0xff46CECA))
+    Item("0", Color(color = 0xffBCF8FF)),
+    Item("1", Color(color = 0xff8AEAE9)),
+    Item("2", Color(color = 0xff46CECA))
 )

@@ -37,7 +37,7 @@ class LabActivity : ComponentActivity() {
     }
 
     @Composable
-    fun LabApp() {
+    private fun LabApp() {
         val systemUiController = rememberSystemUiController()
         val useDarkIcons = MaterialTheme.colors.isLight
         val navController = rememberNavController()

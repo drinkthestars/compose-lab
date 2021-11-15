@@ -3,42 +3,46 @@ package com.goofy.goober.composelab
 sealed class Screen {
     abstract val route: String
 
-    object LabsHome: Screen() {
+    object LabsHome : Screen() {
         override val route: String = "Labs Home"
     }
 
-    object Starfield: Screen() {
+    object Starfield : Screen() {
         override val route: String = "Starfield"
     }
 
-    object Cube: Screen() {
+    object Cube : Screen() {
         override val route: String = "Cube"
     }
 
-    object MiscLab: Screen() {
+    object MiscLab : Screen() {
         override val route: String = "Misc"
     }
 
-    sealed class Gestures: Screen() {
-        object DragAndroidView: Gestures() {
+    sealed class Gestures : Screen() {
+        object DragAndroidView : Gestures() {
             override val route: String = "Drag Android View"
         }
-        object DragRotation3D: Gestures() {
+
+        object DragRotation3D : Gestures() {
             override val route: String = "Drag Rotation 3D"
         }
-        object Rotation3D: Gestures() {
+
+        object Rotation3D : Gestures() {
             override val route: String = "Rotation 3D"
         }
     }
 
-    sealed class Lists: Screen() {
-        object GiphyGifSearch: Lists() {
+    sealed class Lists : Screen() {
+        object GiphyGifSearch : Lists() {
             override val route: String = "Giphy Gif Search"
         }
-        object ItemAnimation: Lists() {
+
+        object ItemAnimation : Lists() {
             override val route: String = "Item Animations"
         }
-        object DynamicShowHideItemAnimation: Lists() {
+
+        object DynamicShowHideItemAnimation : Lists() {
             override val route: String = "Dynamic Item Animations"
         }
     }

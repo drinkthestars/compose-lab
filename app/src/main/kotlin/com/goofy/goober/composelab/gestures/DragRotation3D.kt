@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -36,65 +37,20 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 
+const val FlipThreshDeg = 90f
 private const val RotationFactor = 0.09f
 private const val RotLimit = 180f
 private const val CamDist = 15f
 
 @Composable
 fun DragRotation3D() {
-
-    //region Rotations
     val rotX = remember { Animatable(0f) }
-    var dRotX by remember { mutableStateOf(0f) }
     val rotY = remember { Animatable(0f) }
-    var dRotY by remember { mutableStateOf(0f) }
-    //endregion
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .pointerInput(Unit) {
-                coroutineScope {
-                    while (true) {
-                        awaitPointerEventScope {
-                            val pointerId = awaitFirstDown().run {
-                                launch {
-                                    dRotX = 0f
-                                    dRotY = 0f
-                                }
-                                id
-                            }
-                            drag(pointerId) {
-                                launch {
-                                    dRotX = rotX.value + it.positionChange().y * RotationFactor
-                                    dRotY = rotY.value + it.positionChange().x * RotationFactor
-                                    // TODO: Constrain 180 deg flip only on one axis at a time
-                                    rotX.snapTo(dRotX)
-                                    rotY.snapTo(dRotY)
-                                }
-                            }
-                            //region Restore animation
-                            launch {
-                                awaitAll(
-                                    async {
-                                        rotY.animateTo(
-                                            0f,
-                                            animationSpec = spring(stiffness = Spring.StiffnessLow)
-                                        )
-                                    },
-                                    async {
-                                        rotX.animateTo(
-                                            0f,
-                                            animationSpec = spring(stiffness = Spring.StiffnessLow)
-                                        )
-                                    }
-                                )
-                            }
-                            //endregion
-                        }
-                    }
-                }
-            },
+            .rotateOnDrag(rotX, rotY),
         contentAlignment = Alignment.Center
     ) {
         Box(
@@ -111,8 +67,8 @@ fun DragRotation3D() {
         ) {
             Image(
                 modifier = Modifier
-                    .fillMaxWidth(0.5f)
-                    .aspectRatio(0.726f),
+                    .fillMaxWidth(fraction = 0.5f)
+                    .aspectRatio(ratio = 0.726f),
                 painter = painterResource(rotY, rotX),
                 contentDescription = "charizard",
                 contentScale = ContentScale.FillWidth
@@ -121,16 +77,65 @@ fun DragRotation3D() {
     }
 }
 
+private fun Modifier.rotateOnDrag(
+    rotX: Animatable<Float, AnimationVector1D>,
+    rotY: Animatable<Float, AnimationVector1D>
+): Modifier = composed {
+    var dRotX by remember { mutableStateOf(0f) }
+    var dRotY by remember { mutableStateOf(0f) }
+    pointerInput(Unit) {
+        coroutineScope {
+            while (true) {
+                awaitPointerEventScope {
+                    val pointerId = awaitFirstDown().run {
+                        launch {
+                            dRotX = 0f
+                            dRotY = 0f
+                        }
+                        id
+                    }
+                    drag(pointerId) {
+                        launch {
+                            dRotX = rotX.value + it.positionChange().y * RotationFactor
+                            dRotY = rotY.value + it.positionChange().x * RotationFactor
+                            // TODO Constrain 180 deg flip only on one axis at a time
+                            rotX.snapTo(dRotX)
+                            rotY.snapTo(dRotY)
+                        }
+                    }
+                    //region Restore animation
+                    launch {
+                        awaitAll(
+                            async {
+                                rotY.animateTo(
+                                    targetValue = 0f,
+                                    animationSpec = spring(stiffness = Spring.StiffnessLow)
+                                )
+                            },
+                            async {
+                                rotX.animateTo(
+                                    targetValue = 0f,
+                                    animationSpec = spring(stiffness = Spring.StiffnessLow)
+                                )
+                            }
+                        )
+                    }
+                    //endregion
+                }
+            }
+        }
+    }
+}
+
 @Composable
 fun isFlipped(
     rotY: Animatable<Float, AnimationVector1D>,
     rotX: Animatable<Float, AnimationVector1D>
-) = rotY.value.absoluteValue > 90f || rotX.value.absoluteValue > 90f
+) = rotY.value.absoluteValue > FlipThreshDeg || rotX.value.absoluteValue > FlipThreshDeg
 
 @Composable
 private fun painterResource(
     rotY: Animatable<Float, AnimationVector1D>,
     rotX: Animatable<Float, AnimationVector1D>
-) = if (isFlipped(rotY, rotX)) painterResource(
-    R.drawable.pokemon_back
-) else painterResource(R.drawable.charizard)
+) = if (isFlipped(rotY, rotX)) painterResource(R.drawable.pokemon_back)
+else painterResource(R.drawable.charizard)

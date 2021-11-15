@@ -26,31 +26,27 @@ fun RotatingCube(
     val cubePoints = remember { cubePoints(scaleFactor) }
     Canvas(modifier = modifier) {
         cubePoints.map {
-            val rotatedX = multiply(
-                a = rotationX(cubeState.animatedCubeAngle.value - 5f),
-                b = it,
+            val rotatedX = cubeState.effectiveXRotation.multiply(
+                array = it,
                 r1 = 3,
                 c1 = 3,
                 c2 = 1
             )
-            val rotatedXY = multiply(
-                a = rotationY(cubeState.animatedCubeAngle.value - 3f),
-                b = rotatedX,
+            val rotatedXY = cubeState.effectiveYRotation.multiply(
+                array = rotatedX,
                 r1 = 3,
                 c1 = 3,
                 c2 = 1
             )
-            val rotatedXYZ = multiply(
-                a = rotationZ(cubeState.animatedCubeAngle.value - 6f),
-                b = rotatedXY,
+            val rotatedXYZ = cubeState.effectiveZRotation.multiply(
+                array = rotatedXY,
                 r1 = 3,
                 c1 = 3,
                 c2 = 1
             )
             val skewFactor = skewFactor(rotatedXYZ)
-            val projected2D = multiply(
-                a = skewed2DProjection(skew = 1 / skewFactor),
-                b = rotatedXYZ,
+            val projected2D = skewed2DProjection(skew = 1 / skewFactor).multiply(
+                array = rotatedXYZ,
                 r1 = 2,
                 c1 = 3,
                 c2 = 1
@@ -75,6 +71,12 @@ fun RotatingCube(
         }
     }
 }
+
+private val CubeState.effectiveXRotation get() = rotationX(animatedCubeAngle.value - 5f)
+
+private val CubeState.effectiveYRotation get() = rotationY(animatedCubeAngle.value - 3f)
+
+private val CubeState.effectiveZRotation get() = rotationZ(animatedCubeAngle.value - 6f)
 
 private fun cubePoints(scaleFactor: Float): Array<FloatArray> {
     val absScaleFactor = scaleFactor.absoluteValue
@@ -114,24 +116,6 @@ fun rotationZ(angle: Float) = arrayOf(
     floatArrayOf(0f, 0f, 1f),
 )
 
-private fun multiply(
-    a: Array<FloatArray>,
-    b: FloatArray,
-    r1: Int = 3,
-    c1: Int = 3,
-    c2: Int = 1
-): FloatArray {
-    val product = FloatArray(r1) { 0f }
-    for (i in 0 until r1) {
-        for (j in 0 until c2) {
-            for (k in 0 until c1) {
-                product[i] += a[i][k] * b[k]
-            }
-        }
-    }
-    return product
-}
-
 private fun DrawScope.draw(
     offsets: List<Offset>,
     start: Int,
@@ -157,13 +141,4 @@ private fun DrawScope.draw(
 }
 
 private fun skewFactor(rotatedXYZ: FloatArray) =
-    (CamDistance - normalize(rotatedXYZ.last(), max = 2.8f, min = -2.8f))
-
-private fun normalize(
-    value: Float,
-    max: Float,
-    min: Float
-): Float {
-    return (value - min) / (max - min)
-}
-
+    (CamDistance - rotatedXYZ.last().normalize(max = 2.8f, min = -2.8f))

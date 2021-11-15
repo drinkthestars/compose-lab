@@ -1,0 +1,12 @@
+complexity:
+  LongParameterList:
+    functionThreshold: 25
+    ignoreDefaultParameters: true
+
+naming:
+  TopLevelPropertyNaming:
+    constantPattern: '[A-Z][A-Za-z0-9]*'
+
+style:
+  MagicNumber:
+    ignorePropertyDeclaration: true
