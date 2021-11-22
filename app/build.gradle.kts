@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-android")
-    id("io.gitlab.arturbosch.detekt") version "1.19.0-RC1"
+    id("io.gitlab.arturbosch.detekt") version AppConfig.detektVersion
     id("app.cash.molecule")
 }
 
@@ -57,7 +57,7 @@ android {
 detekt {
     // Define the detekt configuration(s) you want to use.
     // Defaults to the default detekt configuration.
-    config = files("detekt-config.yml")
+    config = files(AppConfig.detektConfig)
     buildUponDefaultConfig = true
 }
 
