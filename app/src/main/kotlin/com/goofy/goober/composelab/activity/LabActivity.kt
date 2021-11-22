@@ -15,6 +15,7 @@ import com.goofy.goober.composelab.ComposableLab
 import com.goofy.goober.composelab.LabScaffold
 import com.goofy.goober.composelab.MiscLab
 import com.goofy.goober.composelab.Screen
+import com.goofy.goober.composelab.animations.OnPlacedModifierAlignmentChange
 import com.goofy.goober.composelab.cube.CubeLab
 import com.goofy.goober.composelab.gestures.DragRotation3D
 import com.goofy.goober.composelab.gestures.InfiniteRotation3D
@@ -61,6 +62,7 @@ class LabActivity : ComponentActivity() {
             composable(Screen.Cube.route) { CubeLab() }
             composable(Screen.Gestures.DragRotation3D.route) { DragRotation3D() }
             composable(Screen.Gestures.Rotation3D.route) { InfiniteRotation3D() }
+            composable(Screen.Animations.AlignmentChange.route) { OnPlacedModifierAlignmentChange() }
             composable(Screen.MiscLab.route) { MiscLab() }
         }
     }
@@ -74,5 +76,6 @@ private val MainLabs = listOf(
     ComposableLab(screen = Screen.Lists.DynamicShowHideItemAnimation),
     ComposableLab(screen = Screen.Gestures.DragRotation3D),
     ComposableLab(screen = Screen.Gestures.Rotation3D),
+    ComposableLab(screen = Screen.Animations.AlignmentChange),
     ComposableLab(screen = Screen.MiscLab)
 )

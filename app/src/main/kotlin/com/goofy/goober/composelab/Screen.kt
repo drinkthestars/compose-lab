@@ -19,6 +19,12 @@ sealed class Screen {
         override val route: String = "Misc"
     }
 
+    sealed class Animations : Screen() {
+        object AlignmentChange : Gestures() {
+            override val route: String = "Alignment Change"
+        }
+    }
+
     sealed class Gestures : Screen() {
         object DragAndroidView : Gestures() {
             override val route: String = "Drag Android View"
