@@ -7,7 +7,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -62,66 +61,26 @@ private fun ZStack(list: List<ListItem>, modifier: Modifier = Modifier) {
     ) {
         list.forEachIndexed { index, item ->
             key(item.id) {
-                RotatedSlideAnimatedVisibility(
-                    item = item,
+                SlideAnimatedVisibilityLab(
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .offset(y = 16.dp * -index)
+                        .offset(y = 16.dp * -index),
+                    state = item.visibilityState
                 ) {
+                    val animatedRotZ by transition.animateFloat(label = "z rotation") { enterExitState ->
+                        rotationDegrees(enterExitState, item.visibilityState)
+                    }
                     Image(
                         modifier = Modifier
                             .width(200.dp)
-                            .aspectRatio(1f),
+                            .aspectRatio(1f)
+                            .graphicsLayer { rotationZ = animatedRotZ },
                         painter = painterResource(item.painterRes),
                         contentDescription = "",
                         contentScale = ContentScale.FillWidth
                     )
                 }
             }
-        }
-    }
-}
-
-@Composable
-private fun RotatedSlideAnimatedVisibility(
-    item: ListItem,
-    modifier: Modifier = Modifier,
-    content: @Composable BoxScope.() -> Unit
-) {
-    SlideAnimatedVisibilityLab(
-        modifier = modifier,
-        state = item.visibilityState
-    ) {
-        val animatedRotZ by transition.animateFloat(
-            label = "z rotation"
-        ) { enterExitState -> rotationDegrees(enterExitState, item.visibilityState) }
-        Box(
-            modifier = Modifier.graphicsLayer { rotationZ = animatedRotZ },
-            content = content
-        )
-    }
-}
-
-@Composable
-private fun rotationDegrees(
-    enterExitState: EnterExitState,
-    state: SlideAnimatedVisibilityState
-) = when (enterExitState) {
-    EnterExitState.PreEnter -> {
-        when (state.inDirection.value) {
-            Direction.In.Left -> -RotationDeg
-            Direction.In.Right -> RotationDeg
-            Direction.In.Up -> 0f
-            Direction.In.Down -> 0f
-        }
-    }
-    EnterExitState.Visible -> 0f
-    EnterExitState.PostExit -> {
-        when (state.outDirection.value) {
-            Direction.Out.Left -> -RotationDeg
-            Direction.Out.Right -> RotationDeg
-            Direction.Out.Up -> 0f
-            Direction.Out.Down -> 0f
         }
     }
 }
@@ -199,6 +158,30 @@ private fun InfoAndControls(
                     "out=${state.outDirection.value.javaClass.simpleName}"
         )
         Spacer(modifier = Modifier.height(80.dp))
+    }
+}
+
+@Composable
+private fun rotationDegrees(
+    enterExitState: EnterExitState,
+    state: SlideAnimatedVisibilityState
+) = when (enterExitState) {
+    EnterExitState.PreEnter -> {
+        when (state.inDirection.value) {
+            Direction.In.Left -> -RotationDeg
+            Direction.In.Right -> RotationDeg
+            Direction.In.Up -> 0f
+            Direction.In.Down -> 0f
+        }
+    }
+    EnterExitState.Visible -> 0f
+    EnterExitState.PostExit -> {
+        when (state.outDirection.value) {
+            Direction.Out.Left -> -RotationDeg
+            Direction.Out.Right -> RotationDeg
+            Direction.Out.Up -> 0f
+            Direction.Out.Down -> 0f
+        }
     }
 }
 
