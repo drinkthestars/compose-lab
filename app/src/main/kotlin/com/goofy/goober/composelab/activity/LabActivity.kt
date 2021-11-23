@@ -16,11 +16,11 @@ import com.goofy.goober.composelab.LabScaffold
 import com.goofy.goober.composelab.MiscLab
 import com.goofy.goober.composelab.Screen
 import com.goofy.goober.composelab.animations.OnPlacedModifierAlignmentChange
-import com.goofy.goober.composelab.cube.CubeLab
+import com.goofy.goober.composelab.cube.Cube3D
 import com.goofy.goober.composelab.gestures.DragRotation3D
 import com.goofy.goober.composelab.gestures.InfiniteRotation3D
 import com.goofy.goober.composelab.lists.animations.AnimatedVisibilityLazyColumn
-import com.goofy.goober.composelab.lists.animations.DynamicShowHideItemAnimation
+import com.goofy.goober.composelab.lists.animations.SlideItemVisibilityZStack
 import com.goofy.goober.composelab.starfield.Starfield
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -55,9 +55,9 @@ class LabActivity : ComponentActivity() {
             startDestination = Screen.LabsHome
         ) {
             composable(Screen.Lists.ItemAnimation.route) { AnimatedVisibilityLazyColumn() }
-            composable(Screen.Lists.DynamicShowHideItemAnimation.route) { DynamicShowHideItemAnimation() }
+            composable(Screen.Lists.SlideItemVisibilityZStack.route) { SlideItemVisibilityZStack() }
             composable(Screen.Starfield.route) { Starfield() }
-            composable(Screen.Cube.route) { CubeLab() }
+            composable(Screen.Cube.route) { Cube3D() }
             composable(Screen.Gestures.DragRotation3D.route) { DragRotation3D() }
             composable(Screen.Gestures.Rotation3D.route) { InfiniteRotation3D() }
             composable(Screen.Animations.AlignmentChange.route) { OnPlacedModifierAlignmentChange() }
@@ -70,7 +70,7 @@ private val MainLabs = listOf(
     ComposableLab(screen = Screen.Starfield),
     ComposableLab(screen = Screen.Cube),
     ComposableLab(screen = Screen.Lists.ItemAnimation),
-    ComposableLab(screen = Screen.Lists.DynamicShowHideItemAnimation),
+    ComposableLab(screen = Screen.Lists.SlideItemVisibilityZStack),
     ComposableLab(screen = Screen.Gestures.DragRotation3D),
     ComposableLab(screen = Screen.Gestures.Rotation3D),
     ComposableLab(screen = Screen.Animations.AlignmentChange),

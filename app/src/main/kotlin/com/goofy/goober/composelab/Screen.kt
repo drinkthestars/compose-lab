@@ -21,7 +21,7 @@ sealed class Screen {
 
     sealed class Animations : Screen() {
         object AlignmentChange : Gestures() {
-            override val route: String = "Alignment Change"
+            override val route: String = "Animated Alignment Change"
         }
     }
 
@@ -44,8 +44,8 @@ sealed class Screen {
             override val route: String = "Item Animations"
         }
 
-        object DynamicShowHideItemAnimation : Lists() {
-            override val route: String = "Dynamic Item Animations"
+        object SlideItemVisibilityZStack : Lists() {
+            override val route: String = "ZStack Sliding Item Visibility"
         }
     }
 }

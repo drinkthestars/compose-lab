@@ -1,10 +1,13 @@
 package com.goofy.goober.composelab.lists.animations
 
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.EnterExitState
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,17 +33,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.goofy.goober.composelab.R
 import com.goofy.goober.composelab.animations.Direction
-import com.goofy.goober.composelab.animations.DirectionalSlideInOut
-import com.goofy.goober.composelab.animations.VisibilityState
+import com.goofy.goober.composelab.animations.SlideAnimatedVisibilityLab
+import com.goofy.goober.composelab.animations.SlideAnimatedVisibilityState
 import java.util.UUID
 
+private const val RotationDeg = 90f
+
 @Composable
-fun DynamicShowHideItemAnimation() {
+fun SlideItemVisibilityZStack() {
     Box(modifier = Modifier.fillMaxSize()) {
         val list = remember { VinylImages.map { ListItem(painterRes = it) } }
         ZStack(list, modifier = Modifier.align(Alignment.Center))
@@ -56,11 +62,11 @@ private fun ZStack(list: List<ListItem>, modifier: Modifier = Modifier) {
     ) {
         list.forEachIndexed { index, item ->
             key(item.id) {
-                DirectionalSlideInOut(
+                RotatedSlideAnimatedVisibility(
+                    item = item,
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .offset(y = 16.dp * -index),
-                    state = item.visibilityState
+                        .offset(y = 16.dp * -index)
                 ) {
                     Image(
                         modifier = Modifier
@@ -72,6 +78,50 @@ private fun ZStack(list: List<ListItem>, modifier: Modifier = Modifier) {
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun RotatedSlideAnimatedVisibility(
+    item: ListItem,
+    modifier: Modifier = Modifier,
+    content: @Composable BoxScope.() -> Unit
+) {
+    SlideAnimatedVisibilityLab(
+        modifier = modifier,
+        state = item.visibilityState
+    ) {
+        val animatedRotZ by transition.animateFloat(
+            label = "z rotation"
+        ) { enterExitState -> rotationDegrees(enterExitState, item.visibilityState) }
+        Box(
+            modifier = Modifier.graphicsLayer { rotationZ = animatedRotZ },
+            content = content
+        )
+    }
+}
+
+@Composable
+private fun rotationDegrees(
+    enterExitState: EnterExitState,
+    state: SlideAnimatedVisibilityState
+) = when (enterExitState) {
+    EnterExitState.PreEnter -> {
+        when (state.inDirection.value) {
+            Direction.In.Left -> -RotationDeg
+            Direction.In.Right -> RotationDeg
+            Direction.In.Up -> 0f
+            Direction.In.Down -> 0f
+        }
+    }
+    EnterExitState.Visible -> 0f
+    EnterExitState.PostExit -> {
+        when (state.outDirection.value) {
+            Direction.Out.Left -> -RotationDeg
+            Direction.Out.Right -> RotationDeg
+            Direction.Out.Up -> 0f
+            Direction.Out.Down -> 0f
         }
     }
 }
@@ -108,7 +158,7 @@ private fun Controls(
 
 @Composable
 private fun InfoAndControls(
-    state: VisibilityState,
+    state: SlideAnimatedVisibilityState,
     onRemoveClick: () -> Unit,
     onRestoreClick: () -> Unit,
     onDirectionChange: () -> Unit,
@@ -174,7 +224,7 @@ private fun Direction.Out.next(): Direction.Out {
 
 @Immutable
 private data class ListItem(
-    val visibilityState: VisibilityState = VisibilityState(),
+    val visibilityState: SlideAnimatedVisibilityState = SlideAnimatedVisibilityState(),
     val id: String = UUID.randomUUID().toString(),
     @DrawableRes val painterRes: Int
 )

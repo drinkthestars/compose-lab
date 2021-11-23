@@ -28,7 +28,7 @@ import com.goofy.goober.composelab.lightNavy
 import com.goofy.goober.composelab.lightPurpleBlue
 
 @Composable
-fun CubeLab() {
+fun Cube3D() {
     val coroutineScope = rememberCoroutineScope()
     val cubeState = rememberCubeState(coroutineScope)
     Column(
@@ -80,5 +80,5 @@ fun PlaybackControlIcon(imageVector: ImageVector, tint: Color) {
 @Preview
 @Composable
 fun CubePreview() {
-    CubeLab()
+    Cube3D()
 }
