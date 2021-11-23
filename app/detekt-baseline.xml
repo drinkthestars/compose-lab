@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>MagicNumber:OnPlacedModifierAlignmentChange.kt$0.8f</ID>
+    <ID>MagicNumber:RotatingCube.kt$4</ID>
+    <ID>MagicNumber:Starfield.kt$15f</ID>
+  </CurrentIssues>
+</SmellBaseline>
