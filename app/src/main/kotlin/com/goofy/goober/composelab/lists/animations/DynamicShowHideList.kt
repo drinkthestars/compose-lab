@@ -42,13 +42,13 @@ import java.util.UUID
 fun DynamicShowHideItemAnimation() {
     Box(modifier = Modifier.fillMaxSize()) {
         val list = remember { VinylImages.map { ListItem(painterRes = it) } }
-        List(list, modifier = Modifier.align(Alignment.TopCenter))
+        ZStack(list, modifier = Modifier.align(Alignment.Center))
         Controls(list, modifier = Modifier.align(Alignment.BottomCenter))
     }
 }
 
 @Composable
-private fun List(list: List<ListItem>, modifier: Modifier = Modifier) {
+private fun ZStack(list: List<ListItem>, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
