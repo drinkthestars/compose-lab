@@ -40,10 +40,6 @@ sealed class Screen {
     }
 
     sealed class Lists : Screen() {
-        object GiphyGifSearch : Lists() {
-            override val route: String = "Giphy Gif Search"
-        }
-
         object ItemAnimation : Lists() {
             override val route: String = "Item Animations"
         }

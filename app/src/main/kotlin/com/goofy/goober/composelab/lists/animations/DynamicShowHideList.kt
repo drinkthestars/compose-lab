@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -53,10 +54,12 @@ private fun ZStack(list: List<ListItem>, modifier: Modifier = Modifier) {
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
-        list.forEach { item ->
+        list.forEachIndexed { index, item ->
             key(item.id) {
                 DirectionalSlideInOut(
-                    modifier = Modifier.align(Alignment.Center),
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .offset(y = 16.dp * -index),
                     state = item.visibilityState
                 ) {
                     Image(
@@ -141,8 +144,10 @@ private fun InfoAndControls(
             }
         }
         Spacer(modifier = Modifier.height(40.dp))
-        Text(text = "in=${state.inDirection.value.javaClass.simpleName}  " +
-                "out=${state.outDirection.value.javaClass.simpleName}")
+        Text(
+            text = "in=${state.inDirection.value.javaClass.simpleName}  " +
+                    "out=${state.outDirection.value.javaClass.simpleName}"
+        )
         Spacer(modifier = Modifier.height(80.dp))
     }
 }
