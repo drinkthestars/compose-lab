@@ -14,6 +14,9 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 private const val CamDistance = 1.7f
+private const val XRotation = 5f
+private const val YRotation = 0f
+private const val ZRotation = 0f
 
 @Composable
 fun RotatingCube(
@@ -26,30 +29,30 @@ fun RotatingCube(
     val cubePoints = remember { cubePoints(scaleFactor) }
     Canvas(modifier = modifier) {
         cubePoints.map {
-            val rotatedX = cubeState.effectiveXRotation.multiply(
+            val rotated = cubeState.effectiveYRotation.multiply(
                 array = it,
-                r1 = 3,
-                c1 = 3,
-                c2 = 1
+                firstRows = 3,
+                firstColumn = 3,
+                secondColumn = 1
             )
-            val rotatedXY = cubeState.effectiveYRotation.multiply(
-                array = rotatedX,
-                r1 = 3,
-                c1 = 3,
-                c2 = 1
-            )
-            val rotatedXYZ = cubeState.effectiveZRotation.multiply(
-                array = rotatedXY,
-                r1 = 3,
-                c1 = 3,
-                c2 = 1
-            )
-            val skewFactor = skewFactor(rotatedXYZ)
+//            val rotatedXY = cubeState.effectiveYRotation.multiply(
+//                array = rotatedX,
+//                r1 = 3,
+//                c1 = 3,
+//                c2 = 1
+//            )
+//            val rotatedXYZ = cubeState.effectiveZRotation.multiply(
+//                array = rotatedXY,
+//                r1 = 3,
+//                c1 = 3,
+//                c2 = 1
+//            )
+            val skewFactor = skewFactor(rotated)
             val projected2D = skewed2DProjection(skew = 1 / skewFactor).multiply(
-                array = rotatedXYZ,
-                r1 = 2,
-                c1 = 3,
-                c2 = 1
+                array = rotated,
+                firstRows = 2,
+                firstColumn = 3,
+                secondColumn = 1
             )
             Offset(projected2D[0] * size, projected2D[1] * size)
         }.also { offsets ->
@@ -72,24 +75,24 @@ fun RotatingCube(
     }
 }
 
-private val CubeState.effectiveXRotation get() = rotationX(animatedCubeAngle.value - 5f)
+private val CubeState.effectiveXRotation get() = rotationX(animatedCubeAngle.value - XRotation)
 
-private val CubeState.effectiveYRotation get() = rotationY(animatedCubeAngle.value - 3f)
+private val CubeState.effectiveYRotation get() = rotationY(animatedCubeAngle.value - YRotation)
 
-private val CubeState.effectiveZRotation get() = rotationZ(animatedCubeAngle.value - 6f)
+private val CubeState.effectiveZRotation get() = rotationZ(animatedCubeAngle.value - ZRotation)
 
 private fun cubePoints(scaleFactor: Float): Array<FloatArray> {
-    val absScaleFactor = scaleFactor.absoluteValue
+    val factor = scaleFactor.absoluteValue
     return arrayOf(
-        floatArrayOf(-absScaleFactor, -absScaleFactor, -absScaleFactor),
-        floatArrayOf(absScaleFactor, -absScaleFactor, -absScaleFactor),
-        floatArrayOf(absScaleFactor, absScaleFactor, -absScaleFactor),
-        floatArrayOf(-absScaleFactor, absScaleFactor, -absScaleFactor),
+        floatArrayOf(-factor, -factor, -factor),
+        floatArrayOf(factor, -factor, -factor),
+        floatArrayOf(factor, factor, -factor),
+        floatArrayOf(-factor, factor, -factor),
 
-        floatArrayOf(-absScaleFactor, -absScaleFactor, absScaleFactor),
-        floatArrayOf(absScaleFactor, -absScaleFactor, absScaleFactor),
-        floatArrayOf(absScaleFactor, absScaleFactor, absScaleFactor),
-        floatArrayOf(-absScaleFactor, absScaleFactor, absScaleFactor)
+        floatArrayOf(-factor, -factor, factor),
+        floatArrayOf(factor, -factor, factor),
+        floatArrayOf(factor, factor, factor),
+        floatArrayOf(-factor, factor, factor)
     )
 }
 
@@ -128,12 +131,12 @@ private fun DrawScope.draw(
         start = startOffset,
         end = endOffset,
         strokeWidth = 10f,
-        color = color,
+        color = color.copy(alpha = 0.8f),
         cap = StrokeCap.Round
     )
     drawPoints(
         points = offsets,
-        color = color,
+        color = color.copy(alpha = 0.8f),
         pointMode = PointMode.Points,
         strokeWidth = 14f,
         cap = StrokeCap.Round
@@ -141,4 +144,4 @@ private fun DrawScope.draw(
 }
 
 private fun skewFactor(rotatedXYZ: FloatArray) =
-    (CamDistance - rotatedXYZ.last().normalize(max = 2.8f, min = -2.8f))
+    (CamDistance - rotatedXYZ.last().normalize(max = 3f, min = -3f))

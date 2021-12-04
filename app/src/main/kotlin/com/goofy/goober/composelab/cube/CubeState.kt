@@ -26,7 +26,7 @@ fun rememberCubeState(
 class CubeState(
     private val coroutineScope: CoroutineScope
 ) {
-    val animatedCubeAngle = Animatable(10f)
+    val animatedCubeAngle = Animatable(0f)
     var isPaused by mutableStateOf(true)
 
     fun playPause() = Snapshot.withMutableSnapshot {
@@ -44,8 +44,8 @@ class CubeState(
             animatedCubeAngle.animateTo(
                 targetValue = 360f,
                 animationSpec = infiniteRepeatable(
-                    animation = tween(durationMillis = 999900, easing = LinearEasing),
-                    repeatMode = RepeatMode.Reverse
+                    animation = tween(durationMillis = 60_000, easing = LinearEasing),
+                    repeatMode = RepeatMode.Restart
                 )
             )
         }
