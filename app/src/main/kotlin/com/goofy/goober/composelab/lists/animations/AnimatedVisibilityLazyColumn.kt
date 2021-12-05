@@ -130,25 +130,6 @@ private fun Info(snapshot: ItemSnapshot) {
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
-//        Row(
-//            horizontalArrangement = Arrangement.Center,
-//            modifier = Modifier.fillMaxWidth()
-//        ) {
-//            Text(
-//                textAlign = TextAlign.Center,
-//                color = Color.Black,
-//                fontSize = 13.sp,
-//                modifier = Modifier.weight(1f),
-//                text = "last removal at = ${listState.removalIndex}"
-//            )
-//            Text(
-//                textAlign = TextAlign.Center,
-//                color = Color.Black,
-//                fontSize = 13.sp,
-//                modifier = Modifier.weight(1f),
-//                text = "selected at = ${listState.selectedIndex}"
-//            )
-//        }
         Spacer(modifier = Modifier.height(12.dp))
         Row(
             horizontalArrangement = Arrangement.Center,

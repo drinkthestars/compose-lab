@@ -45,7 +45,7 @@ class CubeState(
                 targetValue = 360f,
                 animationSpec = infiniteRepeatable(
                     animation = tween(durationMillis = 60_000, easing = LinearEasing),
-                    repeatMode = RepeatMode.Restart
+                    repeatMode = RepeatMode.Reverse
                 )
             )
         }

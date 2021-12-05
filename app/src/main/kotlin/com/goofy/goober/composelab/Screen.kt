@@ -15,6 +15,14 @@ sealed class Screen {
         override val route: String = "Cube"
     }
 
+    object Hypercube : Screen() {
+        override val route: String = "Hypercube"
+    }
+
+    object ComposeSourceDemos : Screen() {
+        override val route: String = "Compose Source Demos"
+    }
+
     object MiscLab : Screen() {
         override val route: String = "Misc"
     }
