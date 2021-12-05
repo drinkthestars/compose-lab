@@ -7,8 +7,11 @@ A Jetpack Compose playground to play around with the APIs, try out weird/random 
 - List animations, animating visibility, drawing on canvas, etc.
 - Random demos taken from [compose source](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/)
 
-## Demos
-
 cube | hypercube | drag + 3d rotation
 -- | -- | --
 <img src="demos/cube.gif" width=170/> | <img src="demos/hyperc.gif" width=170/> | <img src="demos/carddrag.gif" width=170/>
+
+
+#### License
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
