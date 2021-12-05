@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <SmellBaseline>
-    <CurrentIssues>
-        <ID>MagicNumber:OnPlacedModifierAlignmentChange.kt$0.8f</ID>
-        <ID>MagicNumber:RotatingCube.kt$4</ID>
-        <ID>MagicNumber:Starfield.kt$15f</ID>
-    </CurrentIssues>
-    <ManuallySuppressedIssues />
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>MagicNumber:Drawing.kt$4</ID>
+    <ID>MagicNumber:OnPlacedModifierAlignmentChange.kt$0.8f</ID>
+    <ID>MagicNumber:RotatingHypercube.kt$8</ID>
+    <ID>MagicNumber:Starfield.kt$15f</ID>
+  </CurrentIssues>
 </SmellBaseline>
