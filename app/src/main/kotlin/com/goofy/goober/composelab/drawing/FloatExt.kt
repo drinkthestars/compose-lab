@@ -1,4 +1,4 @@
-package com.goofy.goober.composelab.cube
+package com.goofy.goober.composelab.drawing
 
 fun Float.normalize(max: Float, min: Float) = (this - min) / (max - min)
 

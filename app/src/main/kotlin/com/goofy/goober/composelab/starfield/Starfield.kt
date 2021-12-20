@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import com.goofy.goober.composelab.cube.map
+import com.goofy.goober.composelab.drawing.map
 import kotlin.math.absoluteValue
 
 private const val MaxSpeed = 45f

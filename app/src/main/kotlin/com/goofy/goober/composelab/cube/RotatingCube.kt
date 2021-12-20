@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.StrokeCap
 import com.goofy.goober.composelab.drawing.drawCube
+import com.goofy.goober.composelab.drawing.normalize
 import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.sin

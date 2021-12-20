@@ -22,6 +22,7 @@ import com.goofy.goober.composelab.gestures.InfiniteRotation3D
 import com.goofy.goober.composelab.hypercube.Hypercube
 import com.goofy.goober.composelab.lists.animations.AnimatedVisibilityLazyColumn
 import com.goofy.goober.composelab.lists.animations.SlideItemVisibilityZStack
+import com.goofy.goober.composelab.matrix.MatrixCodeRain
 import com.goofy.goober.composelab.starfield.Starfield
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -58,6 +59,7 @@ class LabActivity : ComponentActivity() {
             composable(Screen.Lists.ItemAnimation.route) { AnimatedVisibilityLazyColumn() }
             composable(Screen.Lists.SlideItemVisibilityZStack.route) { SlideItemVisibilityZStack() }
             composable(Screen.Starfield.route) { Starfield() }
+            composable(Screen.MatrixCodeRain.route) { MatrixCodeRain() }
             composable(Screen.Cube.route) { Cube() }
             composable(Screen.Hypercube.route) { Hypercube() }
             composable(Screen.Gestures.DragRotation3D.route) { DragRotation3D() }
@@ -70,6 +72,7 @@ class LabActivity : ComponentActivity() {
 
 private val MainLabs = listOf(
     ComposableLab(screen = Screen.Starfield),
+    ComposableLab(screen = Screen.MatrixCodeRain),
     ComposableLab(screen = Screen.Cube),
     ComposableLab(screen = Screen.Hypercube),
     ComposableLab(screen = Screen.Lists.ItemAnimation),

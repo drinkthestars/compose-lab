@@ -11,9 +11,9 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import com.goofy.goober.composelab.cube.CubeState
 import com.goofy.goober.composelab.cube.multiply
-import com.goofy.goober.composelab.cube.normalize
 import com.goofy.goober.composelab.drawing.drawCube
 import com.goofy.goober.composelab.drawing.drawLine
+import com.goofy.goober.composelab.drawing.normalize
 import kotlin.math.absoluteValue
 import kotlin.math.cos
 import kotlin.math.sin

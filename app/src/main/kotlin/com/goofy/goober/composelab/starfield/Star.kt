@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot.Companion.withMutableSnapshot
 import androidx.compose.ui.geometry.Offset
-import com.goofy.goober.composelab.cube.map
+import com.goofy.goober.composelab.drawing.map
 import kotlin.random.Random
 
 private const val SizeMax = 30f

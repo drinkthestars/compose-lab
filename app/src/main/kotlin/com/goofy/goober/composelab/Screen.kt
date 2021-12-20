@@ -11,6 +11,10 @@ sealed class Screen {
         override val route: String = "Starfield"
     }
 
+    object MatrixCodeRain : Screen() {
+        override val route: String = "Matrix Code Rain"
+    }
+
     object Cube : Screen() {
         override val route: String = "Cube"
     }
