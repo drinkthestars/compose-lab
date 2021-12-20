@@ -9,9 +9,9 @@ A Jetpack Compose playground to play around with the APIs, try out weird/random 
 - Random demos taken
   from [compose source](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/)
 
-cube | hypercube | drag + 3d rotation -- | -- | --
-<img src="demos/cube.gif" width=170/> | <img src="demos/hyperc.gif" width=170/>
-| <img src="demos/carddrag.gif" width=170/>
+cube | hypercube | drag + 3d rotation 
+-- | -- | --
+<img src="demos/cube.gif" width=170/> | <img src="demos/hyperc.gif" width=170/> | <img src="demos/carddrag.gif" width=170/>
 
 #### License
 
