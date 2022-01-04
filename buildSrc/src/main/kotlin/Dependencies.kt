@@ -4,7 +4,7 @@ object Project {
     const val agp = "com.android.tools.build:gradle:$agpVersion"
 
     object Kotlin {
-        const val version = "1.5.31"
+        const val version = "1.6.0"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
     }
 }
@@ -14,7 +14,7 @@ object Libs {
     const val material = "com.google.android.material:material:1.1.0"
 
     object Giphy {
-        const val ui = "com.giphy.sdk:ui:2.0.9"
+        const val ui = "com.giphy.sdk:ui:2.1.12"
     }
 
     object Glide {
@@ -26,7 +26,7 @@ object Libs {
     }
 
     object Accompanist {
-        private const val version = "0.21.0-beta"
+        private const val version = "0.22.0-rc"
         const val insets = "com.google.accompanist:accompanist-insets:$version"
         const val systemUiController =
             "com.google.accompanist:accompanist-systemuicontroller:$version"
@@ -39,7 +39,7 @@ object Libs {
     }
 
     object Coroutines {
-        private const val version = "1.5.2"
+        private const val version = "1.6.0"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
         const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
@@ -47,11 +47,11 @@ object Libs {
 
     object AndroidX {
         const val coreKtx = "androidx.core:core-ktx:1.7.0"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
-        const val appCompat = "androidx.appcompat:appcompat:1.4.0-rc01"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.2"
+        const val appCompat = "androidx.appcompat:appcompat:1.4.0"
 
         object Compose {
-            const val version = "1.1.0-beta04"
+            const val version = "1.1.0-rc01"
 
             const val animation = "androidx.compose.animation:animation:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"
@@ -67,7 +67,7 @@ object Libs {
         }
 
         object Navigation {
-            private const val version = "2.4.0-beta01"
+            private const val version = "2.4.0-rc01"
             const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
             const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
             const val compose = "androidx.navigation:navigation-compose:$version"
@@ -87,7 +87,7 @@ object Libs {
         }
 
         object Hilt {
-            const val navCompose = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
+            const val navCompose = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha02"
         }
 
         object Test {

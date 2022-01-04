@@ -3,7 +3,6 @@ plugins {
     kotlin("android")
     id("kotlin-android")
     id("io.gitlab.arturbosch.detekt") version AppConfig.detektVersion
-    id("app.cash.molecule")
 }
 
 android {
