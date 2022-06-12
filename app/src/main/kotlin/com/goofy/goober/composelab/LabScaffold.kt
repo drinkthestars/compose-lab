@@ -1,17 +1,16 @@
 package com.goofy.goober.composelab
 
 import android.content.Intent
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,17 +30,21 @@ fun LabScaffold(
     navGraphBuilder: NavGraphBuilder.() -> Unit,
 ) {
     MaterialTheme {
-        Surface {
-            NavHost(navController, startDestination = startDestination.route) {
+        Scaffold {
+            NavHost(
+                modifier = Modifier.padding(it),
+                navController = navController,
+                startDestination = startDestination.route
+            ) {
                 composable(startDestination.route) {
                     val context = LocalContext.current
-                    Labs(labs, onClick = {
-                        when (it) {
+                    Labs(labs, onClick = { lab ->
+                        when (lab) {
                             is ActivityLab<*> -> {
-                                context.startActivity(Intent(context, it.activityClass.java))
+                                context.startActivity(Intent(context, lab.activityClass.java))
                             }
                             is ComposableLab -> {
-                                navController.navigate(it.screen.route)
+                                navController.navigate(lab.screen.route)
                             }
                         }
                     })
@@ -57,18 +60,22 @@ private fun Labs(
     labs: List<Lab>,
     onClick: (Lab) -> Unit,
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .scrollable(rememberScrollableState { it }, orientation = Orientation.Vertical),
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        labs.forEach { lab ->
+        item {
+            Spacer(Modifier.height(48.dp))
+        }
+        items(labs, key = { it.title }) { lab ->
             Button(onClick = { onClick(lab) }) {
                 Text(lab.title)
             }
             Spacer(modifier = Modifier.height(16.dp))
+        }
+        item {
+            Spacer(Modifier.height(48.dp))
         }
     }
 }

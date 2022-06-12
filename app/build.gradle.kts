@@ -61,6 +61,9 @@ detekt {
 }
 
 dependencies {
+    debugImplementation(Libs.AndroidX.Compose.toolingPreview)
+    implementation(Libs.AndroidX.Compose.tooling)
+
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.Coroutines.android)
     implementation(Libs.Coroutines.core)
@@ -85,7 +88,8 @@ dependencies {
     implementation(Libs.AndroidX.Compose.material)
     implementation(Libs.AndroidX.Compose.animation)
     implementation(Libs.AndroidX.Compose.iconsExtended)
-    implementation(Libs.AndroidX.Compose.tooling)
+
+    implementation(Libs.AndroidX.ConstraintLayout.compose)
     implementation(Libs.AndroidX.Hilt.navCompose)
     implementation(Libs.AndroidX.Navigation.compose)
 
@@ -96,7 +100,6 @@ dependencies {
 
     androidTestImplementation(Libs.junit)
     androidTestImplementation(Libs.AndroidX.Test.core)
-    androidTestImplementation(Libs.AndroidX.Test.espressoCore)
     androidTestImplementation(Libs.AndroidX.Test.rules)
     androidTestImplementation(Libs.AndroidX.Test.Ext.junit)
     androidTestImplementation(Libs.AndroidX.Compose.test)

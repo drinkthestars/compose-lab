@@ -23,8 +23,16 @@ sealed class Screen {
         override val route: String = "Hypercube"
     }
 
+    object Recompositions : Screen() {
+        override val route: String = "Recompositions"
+    }
+
     object ComposeSourceDemos : Screen() {
         override val route: String = "Compose Source Demos"
+    }
+
+    object CaseStudies : Screen() {
+        override val route: String = "Ui Case Studies"
     }
 
     object MiscLab : Screen() {
@@ -58,6 +66,12 @@ sealed class Screen {
 
         object SlideItemVisibilityZStack : Lists() {
             override val route: String = "ZStack Sliding Item Visibility"
+        }
+    }
+
+    sealed class UiCaseStudies : Screen() {
+        object PlantApp : UiCaseStudies() {
+            override val route: String = "Planet Plants!"
         }
     }
 }

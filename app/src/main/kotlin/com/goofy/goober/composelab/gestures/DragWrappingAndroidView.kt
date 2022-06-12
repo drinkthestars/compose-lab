@@ -19,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.consumePositionChange
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -59,7 +59,7 @@ fun DragWrappingAndroidView() {
                             x = summed.x.coerceIn(0f, boxSize.width - cardSize.width),
                             y = summed.y.coerceIn(0f, boxSize.height - cardSize.height)
                         )
-                        change.consumePositionChange()
+                        if (change.positionChange() != Offset.Zero) change.consume()
                         offsetX.value = newValue.x
                         offsetY.value = newValue.y
                     }

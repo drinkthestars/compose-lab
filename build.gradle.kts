@@ -6,7 +6,6 @@ buildscript {
     dependencies {
         classpath(Project.agp)
         classpath(Project.Kotlin.gradlePlugin)
-        classpath("com.android.tools.build:gradle:7.2.0-alpha04")
     }
 }
 

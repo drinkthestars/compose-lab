@@ -96,9 +96,9 @@ private class Stream(
     private val fixedAlpha: Int? = null,
 ) {
 
-    private var glyphs: ArrayList<Glyph> = ArrayList(maxGlyphs)
-    private var glyphCount: Int = randomInt(MinGlyphCount, maxGlyphs)
-    private var glyphYDelta: Int = randomInt(0, height - TextSize)
+    private val glyphs: ArrayList<Glyph> = ArrayList(maxGlyphs)
+    private val glyphCount: Int = randomInt(MinGlyphCount, maxGlyphs)
+    private val glyphYDelta: Int = randomInt(0, height - TextSize)
     private var highlightRange: IntRange
     private val glyphsLastIndex: Int
 
