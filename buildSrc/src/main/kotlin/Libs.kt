@@ -44,7 +44,7 @@ object Libs {
 
         object Compose {
             const val version = "1.2.0-beta03"
-            const val toolingVersion = "1.1.1"
+            private const val toolingVersion = "1.1.1"
 
             const val animation = "androidx.compose.animation:animation:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"

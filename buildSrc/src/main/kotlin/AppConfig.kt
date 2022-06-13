@@ -15,7 +15,7 @@ object AppConfig {
 }
 
 object Project {
-    private const val agpVersion = "7.2.1"
+    private const val agpVersion = "7.4.0-alpha03"
     const val jvmTarget = "1.8"
     const val agp = "com.android.tools.build:gradle:$agpVersion"
 
