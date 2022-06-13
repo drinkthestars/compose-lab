@@ -40,8 +40,12 @@ sealed class Screen {
     }
 
     sealed class Animations : Screen() {
-        object AlignmentChange : Gestures() {
+        object AlignmentChange : Animations() {
             override val route: String = "Animated Alignment Change"
+        }
+
+        object AnimatedText : Animations() {
+            override val route: String = "Animated Text"
         }
     }
 
