@@ -58,7 +58,7 @@ val PropArrow = Color(0xFF898F91)
 
 @Composable
 fun PlantApp() {
-    Box(    
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .navigationBarsPadding()
@@ -106,7 +106,9 @@ fun Plant() {
     val screenWidth = config.screenWidthDp.dp
 
     Box(
-        modifier = Modifier.fillMaxWidth().wrapContentSize(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentSize(),
         contentAlignment = Alignment.Center
     ) {
         Box(
@@ -208,7 +210,9 @@ fun Footer() {
         }
         Spacer(Modifier.width(42.dp))
         IconButton(
-            modifier = Modifier.size(24.dp).padding(top = 4.dp),
+            modifier = Modifier
+                .size(24.dp)
+                .padding(top = 4.dp),
             onClick = {}
         ) {
             Icon(

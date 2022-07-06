@@ -13,6 +13,7 @@ object Libs {
 
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Project.Kotlin.version}"
+        const val graphicsGlm = "kotlin.graphics:glm:0.9.9.1-4"
     }
 
     object Accompanist {

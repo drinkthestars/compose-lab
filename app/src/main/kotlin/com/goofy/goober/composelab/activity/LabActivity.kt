@@ -26,6 +26,7 @@ import com.goofy.goober.composelab.hypercube.Hypercube
 import com.goofy.goober.composelab.lists.animations.AnimatedVisibilityLazyColumn
 import com.goofy.goober.composelab.lists.animations.SlideItemVisibilityZStack
 import com.goofy.goober.composelab.matrix.MatrixCodeRain
+import com.goofy.goober.composelab.sketch.SketchLab
 import com.goofy.goober.composelab.starfield.Starfield
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -50,7 +51,8 @@ class LabActivity : ComponentActivity() {
         SideEffect {
             systemUiController.setSystemBarsColor(
                 color = Color.Transparent,
-                darkIcons = useDarkIcons
+                darkIcons = useDarkIcons,
+                transformColorForLightContent = { _ -> Color.Transparent }
             )
         }
 
@@ -62,6 +64,7 @@ class LabActivity : ComponentActivity() {
             composable(Screen.Lists.ItemAnimation.route) { AnimatedVisibilityLazyColumn() }
             composable(Screen.Lists.SlideItemVisibilityZStack.route) { SlideItemVisibilityZStack() }
             composable(Screen.Starfield.route) { Starfield() }
+            composable(Screen.Sketch.route) { SketchLab() }
             composable(Screen.MatrixCodeRain.route) { MatrixCodeRain() }
             composable(Screen.Cube.route) { Cube() }
             composable(Screen.Hypercube.route) { Hypercube() }
@@ -78,6 +81,7 @@ class LabActivity : ComponentActivity() {
 
 private val MainLabs = listOf(
     ComposableLab(screen = Screen.Starfield),
+    ComposableLab(screen = Screen.Sketch),
     ComposableLab(screen = Screen.MatrixCodeRain),
     ComposableLab(screen = Screen.Cube),
     ComposableLab(screen = Screen.Hypercube),

@@ -11,6 +11,6 @@ naming:
 
 style:
   MagicNumber:
-    ignorePropertyDeclaration: true
+    active: false
   UnusedPrivateMember:
     ignoreAnnotated: [ 'Preview' ]

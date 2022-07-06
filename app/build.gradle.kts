@@ -37,6 +37,7 @@ android {
         resources.excludes.add("META-INF/licenses/**")
         resources.excludes.add("META-INF/AL2.0")
         resources.excludes.add("META-INF/LGPL2.1")
+        resources.excludes.add("META-INF/INDEX.LIST")
     }
 
     buildFeatures {
@@ -65,6 +66,7 @@ dependencies {
     implementation(Libs.AndroidX.Compose.tooling)
 
     implementation(Libs.Kotlin.stdlib)
+    implementation(Libs.Kotlin.graphicsGlm)
     implementation(Libs.Coroutines.android)
     implementation(Libs.Coroutines.core)
     implementation(Libs.material)
